@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuvendu Chatterjee - Principal Engineer | Enterprise Data Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --secondary: #1a1f3a;
+            --tertiary: #252d4a;
+            --accent: #00d9ff;
+            --accent-alt: #ff006e;
+            --text-primary: #e8ecf1;
+            --text-secondary: #b4bcc7;
+            --success: #00ff88;
+            --warning: #ffb400;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1424 50%, var(--primary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            padding: 1.25rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 0, 110, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-50px); }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.5rem;
+            animation: slideDown 0.8s ease 0.1s both;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            animation: slideDown 0.8s ease 0.2s both;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            animation: slideDown 0.8s ease 0.3s both;
+        }
+
+        .metric {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .metric:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideDown 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+            color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .section-title .accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* ===== CASE STUDIES ===== */
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.6), rgba(37, 45, 74, 0.4));
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-study::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .case-study:hover {
+            border-color: rgba(0, 217, 255, 0.3);
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(37, 45, 74, 0.6));
+            transform: translateY(-8px);
+        }
+
+        .case-study:hover::before {
+            transform: scaleX(1);
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            padding: 0.35rem 0.85rem;
+            border-radius: 0.35rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .case-study h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .case-study-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .case-study-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .metric-item {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .metric-item-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-item-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+        }
+
+        .case-study-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 217, 255, 0.08);
+            color: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.3rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 217, 255, 0.15);
+        }
+
+        /* ===== EXPERTISE GRID ===== */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-card {
+            background: rgba(26, 31, 58, 0.4);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 2.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .expertise-card:hover {
+            background: rgba(26, 31, 58, 0.7);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .expertise-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .expertise-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(26, 31, 58, 0.3);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 2rem;
+        }
+
+        .skill-category-title {
+            color: var(--accent);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-category-title::before {
+            content: '';
+            width: 3px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill {
+            background: rgba(0, 217, 255, 0.08);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 217, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .skill:hover {
+            background: rgba(0, 217, 255, 0.15);
+            border-color: var(--accent);
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.85rem;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .timeline-company {
+            color: var(--accent-alt);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                margin-top: 80px;
+                min-height: auto;
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .case-study-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -2.35rem;
+            }
+
+            .hero-metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fade-in.visible {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ACCENT ANIMATIONS ===== */
+        .accent-pulse {
+            animation: accentPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes accentPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">SC</div>
+            <ul class="nav-links">
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#cases">Cases</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">PRINCIPAL ENGINEER | ENTERPRISE DATA ARCHITECTURE</div>
+            <h1>Building <span class="highlight">data platforms</span> that scale</h1>
+            <p class="hero-subtitle">14+ years architecting mission-critical integrations and enterprise systems. Designed, built, and scaled platforms connecting 120+ applications across global operations.</p>
+            
+            <div class="hero-metrics">
+                <div class="metric">
+                    <div class="metric-value">120+</div>
+                    <div class="metric-label">Production Systems</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">95%+</div>
+                    <div class="metric-label">Uptime Achieved</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">90+</div>
+                    <div class="metric-label">Migrations Led</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">14yr</div>
+                    <div class="metric-label">Experience</div>
+                </div>
+            </div>
+
+            <div class="cta-group">
+                <a href="#contact" class="btn btn-primary">Start a conversation</a>
+                <a href="https://www.linkedin.com/in/shuvendu-chatterjee/" class="btn btn-secondary">View on LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="cases">
+        <div class="section-header">
+            <div class="section-tag">How I Create Value</div>
+            <h2 class="section-title">Enterprise Problems, <span class="accent">Scaled Solutions</span></h2>
+            <p class="section-subtitle">Real challenges solved for enterprise teams managing complex data and systems integration.</p>
+        </div>
+
+        <div class="case-study-grid">
+            <!-- Case 1: 120+ Integration Platform -->
+            <div class="case-study fade-in">
+                <div class="case-study-tag">ENTERPRISE SCALE</div>
+                <h3>120+ Integration Platform</h3>
+                <p class="case-study-subtitle">Building a scalable integration architecture supporting 120+ production systems</p>
+                <p>Led design and implementation of API-led 3-tier architecture enabling 120+ production integrations across enterprise systems. Designed patterns for Order Management, CRM, and Financial System connectors. Implemented comprehensive monitoring achieving 95%+ SLA despite organizational complexity.</p>
+                
+                <div class="case-study-metrics">
+                    <div class="metric-item">
+                        <div class="metric-item-value">120</div>
+                        <div class="metric-item-label">Active Integrations</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item-value">95%+</div>
+                        <div class="metric-item-label">SLA Achieved</div>
+                    </div>
+                </div>
+
+                <div class="case-study-tech">
+                    <span class="tech-tag">MuleSoft</span>
+                    <span class="tech-tag">API-Led Architecture</span>
+                    <span class="tech-tag">Real-Time Sync</span>
+                    <span class="tech-tag">Dynatrace</span>
+                </div>
+            </div>
+
+            <!-- Case 2: SAP Migration -->
+            <div class="case-study fade-in">
+                <div class="case-study-tag">MODERNIZATION</div>
+                <h3>90+ Application Migration</h3>
+                <p class="case-study-subtitle">Legacy platform modernization to cloud-native architecture</p>
+                <p>Led technical delivery of SAP S/4-HANA transition, migrating 90+ applications from legacy platforms (BizTalk, CastIron, SSIS) to modern MuleSoft. Designed phased migration strategy, automated testing framework, and OAuth 2.0 security implementation across all systems.</p>
+                
+                <div class="case-study-metrics">
+                    <div class="metric-item">
+                        <div class="metric-item-value">90+</div>
+                        <div class="metric-item-label">Apps Migrated</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item-value">70%</div>
+                        <div class="metric-item-label">Test Coverage</div>
+                    </div>
+                </div>
+
+                <div class="case-study-tech">
+                    <span class="tech-tag">SAP S/4-HANA</span>
+                    <span class="tech-tag">MUnit Tests</span>
+                    <span class="tech-tag">OAuth 2.0</span>
+                    <span class="tech-tag">Okta</span>
+                </div>
+            </div>
+
+            <!-- Case 3: Order Management -->
+            <div class="case-study fade-in">
+                <div class="case-study-tag">ARCHITECTURE</div>
+                <h3>Order Management Platform</h3>
+                <p class="case-study-subtitle">Real-time order synchronization connecting sales, fulfillment, and payment systems</p>
+                <p>Designed Order Management integration architecture connecting e-commerce channels to fulfillment systems and payment gateways in real-time. Implemented idempotent operations, deduplication logic, and event-driven patterns. Handles millions of transactions daily with zero data loss.</p>
+                
+                <div class="case-study-metrics">
+                    <div class="metric-item">
+                        <div class="metric-item-value">1M+</div>
+                        <div class="metric-item-label">Daily Transactions</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item-value">~0ms</div>
+                        <div class="metric-item-label">Latency (Real-Time)</div>
+                    </div>
+                </div>
+
+                <div class="case-study-tech">
+                    <span class="tech-tag">Real-Time Sync</span>
+                    <span class="tech-tag">Event-Driven</span>
+                    <span class="tech-tag">Idempotency</span>
+                    <span class="tech-tag">Salesforce</span>
+                </div>
+            </div>
+
+            <!-- Case 4: CRM Integration -->
+            <div class="case-study fade-in">
+                <div class="case-study-tag">DATA PLATFORM</div>
+                <h3>Master Data CRM Integration</h3>
+                <p class="case-study-subtitle">Customer master data synchronization across enterprise systems</p>
+                <p>Architected hub-and-spoke CRM integration establishing Salesforce as customer master data source. Implemented bidirectional sync with conflict resolution, real-time critical updates, and nightly reconciliation. Ensures data consistency across order, support, and marketing systems.</p>
+                
+                <div class="case-study-metrics">
+                    <div class="metric-item">
+                        <div class="metric-item-value">100%</div>
+                        <div class="metric-item-label">Data Consistency</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item-value">5min</div>
+                        <div class="metric-item-label">Max Sync Delay</div>
+                    </div>
+                </div>
+
+                <div class="case-study-tech">
+                    <span class="tech-tag">Hub-and-Spoke</span>
+                    <span class="tech-tag">Salesforce</span>
+                    <span class="tech-tag">Bidirectional Sync</span>
+                    <span class="tech-tag">MDM</span>
+                </div>
+            </div>
+
+            <!-- Case 5: Monitoring & Observability -->
+            <div class="case-study fade-in">
+                <div class="case-study-tag">OPERATIONS</div>
+                <h3>Comprehensive Monitoring Strategy</h3>
+                <p class="case-study-subtitle">Enterprise observability platform for 40+ mission-critical applications</p>
+                <p>Established comprehensive monitoring strategy using Dynatrace and Splunk for 40+ mission-critical applications. Implemented alerting, anomaly detection, and trend analysis enabling proactive issue resolution. Achieved 95%+ SLA through predictive monitoring.</p>
+                
+                <div class="case-study-metrics">
+                    <div class="metric-item">
+                        <div class="metric-item-value">40+</div>
+                        <div class="metric-item-label">Monitored Apps</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item-value">15min</div>
+                        <div class="metric-item-label">MTTR (Mean Time)</div>
+                    </div>
+                </div>
+
+                <div class="case-study-tech">
+                    <span class="tech-tag">Dynatrace</span>
+                    <span class="tech-tag">Splunk</span>
+                    <span class="tech-tag">APM</span>
+                    <span class="tech-tag">Alerting</span>
+                </div>
+            </div>
+
+            <!-- Case 6: Security Framework -->
+            <div class="case-study fade-in">
+                <div class="case-study-tag">SECURITY</div>
+                <h3>OAuth 2.0 Security Framework</h3>
+                <p class="case-study-subtitle">Enterprise API security and client authentication implementation</p>
+                <p>Designed and implemented OAuth 2.0 and Okta-based security framework across 20+ client applications. Established API security standards, client authentication patterns, and access control policies. Enabled secure third-party integrations while maintaining enterprise security posture.</p>
+                
+                <div class="case-study-metrics">
+                    <div class="metric-item">
+                        <div class="metric-item-value">20+</div>
+                        <div class="metric-item-label">Secure Clients</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item-value">100%</div>
+                        <div class="metric-item-label">Encrypted</div>
+                    </div>
+                </div>
+
+                <div class="case-study-tech">
+                    <span class="tech-tag">OAuth 2.0</span>
+                    <span class="tech-tag">Okta</span>
+                    <span class="tech-tag">API Security</span>
+                    <span class="tech-tag">Encryption</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise">
+        <div class="section-header">
+            <div class="section-tag">What I Know</div>
+            <h2 class="section-title">Deep <span class="accent">Technical</span> Expertise</h2>
+        </div>
+
+        <div class="expertise-grid">
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🏗️</div>
+                <h3>Enterprise Integration</h3>
+                <p>API-led 3-tier architecture, hub-and-spoke patterns, event-driven systems. 120+ production integrations designed and maintained.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">📊</div>
+                <h3>Data Integration & ETL</h3>
+                <p>Cloud-native ETL/ELT pipelines, real-time data synchronization, batch processing, data transformation at enterprise scale.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">☁️</div>
+                <h3>Cloud Architecture</h3>
+                <p>Azure Data Factory, AWS integration patterns, cloud-native design, distributed systems, scalability patterns.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🔐</div>
+                <h3>API & Security</h3>
+                <p>OAuth 2.0 frameworks, API security standards, access control, data governance, enterprise authentication patterns.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">📈</div>
+                <h3>Monitoring & Reliability</h3>
+                <p>Dynatrace, Splunk, comprehensive observability, SLA management, 95%+ uptime achievement at scale.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🎯</div>
+                <h3>Enterprise Systems</h3>
+                <p>Salesforce, ServiceNow, SAP, Order Management, CRM, Financial Systems integration and master data management.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">Technical Stack</div>
+            <h2 class="section-title">Languages & <span class="accent">Technologies</span></h2>
+        </div>
+
+        <div class="skills-section">
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Integration Platforms</h4>
+                <div class="skill-list">
+                    <span class="skill">MuleSoft AnyPoint</span>
+                    <span class="skill">Azure Data Factory</span>
+                    <span class="skill">BizTalk Server</span>
+                    <span class="skill">API-Led Architecture</span>
+                    <span class="skill">Microservices</span>
+                    <span class="skill">SOA</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Programming Languages</h4>
+                <div class="skill-list">
+                    <span class="skill">Java</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">C#</span>
+                    <span class="skill">DataWeave</span>
+                    <span class="skill">XML/JSON</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Cloud & Data</h4>
+                <div class="skill-list">
+                    <span class="skill">Azure</span>
+                    <span class="skill">AWS</span>
+                    <span class="skill">ETL/ELT</span>
+                    <span class="skill">Data Pipelines</span>
+                    <span class="skill">Real-Time Processing</span>
+                    <span class="skill">Event Streaming</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Enterprise Systems</h4>
+                <div class="skill-list">
+                    <span class="skill">Salesforce</span>
+                    <span class="skill">ServiceNow</span>
+                    <span class="skill">SAP</span>
+                    <span class="skill">Dynamics</span>
+                    <span class="skill">Order Management</span>
+                    <span class="skill">CRM</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Monitoring & DevOps</h4>
+                <div class="skill-list">
+                    <span class="skill">Dynatrace</span>
+                    <span class="skill">Splunk</span>
+                    <span class="skill">Jenkins</span>
+                    <span class="skill">GitHub Actions</span>
+                    <span class="skill">CI/CD</span>
+                    <span class="skill">MUnit Testing</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Certifications</h4>
+                <div class="skill-list">
+                    <span class="skill">MuleSoft Dev II</span>
+                    <span class="skill">MuleSoft Dev I</span>
+                    <span class="skill">Azure Data Fundamentals</span>
+                    <span class="skill">BizTalk MCTS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header">
+            <div class="section-tag">Career Journey</div>
+            <h2 class="section-title">Professional <span class="accent">Experience</span></h2>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <h3>Senior Integration Developer</h3>
+                <div class="timeline-company">Esri / Disney Entertainment</div>
+                <div class="timeline-date">Feb 2023 – Present</div>
+                <p class="timeline-description">Leading enterprise integration initiatives for Disney's media technology portfolio. Designed and implemented integrations for Order Management, CRM, and financial systems supporting millions of transactions. Established comprehensive monitoring achieving 95%+ SLA across 120+ production integrations. Part of Enterprise Center for Enablement setting MuleSoft best practices organization-wide.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <h3>Integration Developer</h3>
+                <div class="timeline-company">Esri</div>
+                <div class="timeline-date">Jun 2019 – Jan 2023</div>
+                <p class="timeline-description">Maintained and enhanced platform supporting 120+ production integrations with 95% SLA adherence. Implemented OAuth 2.0 client authentication for 20+ applications. Established monitoring practices using Dynatrace and AnyPoint Monitoring, analyzed performance trends, and optimized resource allocation.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <h3>Integration Developer – SAP Migration</h3>
+                <div class="timeline-company">Esri</div>
+                <div class="timeline-date">Sep 2019 – Jan 2021</div>
+                <p class="timeline-description">Led technical delivery of SAP S/4-HANA transition, successfully migrating 90+ applications from BizTalk, CastIron, and SSIS. Designed API specifications, developed real-time APIs, and generated automated MUnit test framework with 70%+ application coverage.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <h3>Senior BizTalk Consultant</h3>
+                <div class="timeline-company">Tata Consultancy Services (TCS)</div>
+                <div class="timeline-date">Jul 2014 – May 2019</div>
+                <p class="timeline-description">Led teams of 10+ engineers building 150+ real-time integrations for energy and utilities sector. Architected enterprise integration solutions for Direct Energy and TransAlta. Pioneered cloud migration strategy moving 300+ on-premise BizTalk solutions to Azure Cloud using Logic Apps.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <div class="section-tag">Let's Connect</div>
+            <h2 class="section-title">Ready to <span class="accent">build something great?</span></h2>
+            <p class="section-subtitle">Interested in discussing enterprise architecture, data platforms, or exploring opportunities? I'd love to connect.</p>
+        </div>
+
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/shuvendu-chatterjee/" class="contact-link">
+                <span>→</span> LinkedIn
+            </a>
+            <a href="mailto:shuvendu2008@gmail.com" class="contact-link">
+                <span>→</span> Email
+            </a>
+            <a href="tel:+18322739882" class="contact-link">
+                <span>→</span> +1 832-273-9882
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Shuvendu Chatterjee. Principal Engineer | Enterprise Data Architecture.</p>
+    </footer>
+
+    <script>
+        // Smooth navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.setProperty('--mouse-x', x);
+            document.body.style.setProperty('--mouse-y', y);
+        });
+    </script>
+</body>
+</html>
