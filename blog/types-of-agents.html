@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five Types of AI Agents: From Reflex to Learning Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-darker: #050810;
+            --electric-blue: #00d4ff;
+            --electric-cyan: #00ffcc;
+            --electric-purple: #b366ff;
+            --text-primary: #e8edf4;
+            --text-muted: #8b95a8;
+            --accent-glow: rgba(0, 212, 255, 0.3);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Crimson Pro', serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+            padding: 1.25rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(179, 102, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--electric-blue), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--electric-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Base */
+        section {
+            position: relative;
+            padding: 6rem 2rem;
+            min-height: auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--electric-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .content-block {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 3rem 0 1.5rem;
+            color: var(--electric-cyan);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--electric-cyan);
+        }
+
+        /* Agent Cards */
+        .agent-card {
+            background: rgba(26, 31, 58, 0.4);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            transition: all 0.4s ease;
+        }
+
+        .agent-card:hover {
+            background: rgba(26, 31, 58, 0.7);
+            border-color: var(--electric-blue);
+            box-shadow: 0 20px 60px var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .agent-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(0, 212, 255, 0.15);
+            margin-bottom: 1rem;
+        }
+
+        .agent-card h3 {
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .agent-example {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid var(--electric-cyan);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .agent-example strong {
+            color: var(--electric-blue);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(26, 31, 58, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 212, 255, 0.05);
+            color: var(--electric-cyan);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(0, 212, 255, 0.03);
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid var(--electric-cyan);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .insight-box strong {
+            color: var(--electric-blue);
+        }
+
+        /* Subscribe Section */
+        .subscribe-section {
+            margin: 6rem 0;
+            padding: 4rem 2rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .subscribe-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .subscribe-content h2 {
+            margin-top: 0;
+        }
+
+        .subscribe-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .subscribe-btn {
+            padding: 1rem 2rem;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .subscribe-btn-primary {
+            background: linear-gradient(135deg, var(--electric-blue), var(--electric-purple));
+        }
+
+        .subscribe-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        .subscribe-btn-secondary {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--electric-blue);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .subscribe-btn-secondary:hover {
+            border-color: var(--electric-blue);
+            background: rgba(0, 212, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Author Section */
+        .author-section {
+            margin-top: 6rem;
+            padding: 4rem 2rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-top: 1px solid rgba(14, 165, 233, 0.1);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .author-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .author-image {
+            flex-shrink: 0;
+        }
+
+        .author-image img {
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .author-image img:hover {
+            border-color: var(--electric-blue);
+            box-shadow: 0 10px 30px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        .author-bio h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-bio .title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .author-bio p {
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1rem; }
+            .hero { margin-top: 50px; }
+            .hero-title { font-size: 2.5rem; }
+            section { padding: 4rem 1.5rem; }
+            .author-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            .author-image {
+                display: flex;
+                justify-content: center;
+            }
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--electric-blue);
+            text-decoration: none;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">SC</div>
+            <ul class="nav-links">
+                <li><a href="../">Portfolio</a></li>
+                <li><a href="./">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <a href="./" class="back-link">← Back to Blog</a>
+            <div class="hero-meta">Understanding Agentic AI</div>
+            <h1 class="hero-title">Five Types of AI Agents</h1>
+            <p class="hero-subtitle">From Simple Reflex to Learning Systems: Understanding How Different AI Agents Make Decisions</p>
+            <div class="hero-meta">February 17, 2026 · 12 min read</div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container">
+        <div class="content-block">
+            <p>
+                As we explore agentic AI for enterprise integration, it's crucial to understand the different types of AI agents and how they make decisions. 
+                Each type has distinct characteristics, strengths, and weaknesses that determine where they're best applied. 
+                In this article, we'll break down the five main types of AI agents and explore how they apply to real-world enterprise scenarios.
+            </p>
+        </div>
+
+        <h2>The Five Types of AI Agents</h2>
+
+        <!-- Agent 1 -->
+        <div class="agent-card">
+            <div class="agent-number">01</div>
+            <h3>Simple Reflex Agent</h3>
+            <p>The foundational agent type, simple reflex agents operate on <strong>predefined if-then rules</strong> without memory of past states.</p>
+            <p><strong>How it works:</strong> Perceive input → Apply condition-action rules → Execute action</p>
+            
+            <div class="agent-example">
+                <strong>Real-world example:</strong> A thermostat maintaining temperature. If temperature drops below 68°F, turn on heating. If it rises above 72°F, activate cooling. No memory, no learning—just reaction.
+            </div>
+
+            <p><strong>Enterprise integration example:</strong> A simple webhook that triggers on a specific API event (e.g., "if order status = 'shipped', send email notification").</p>
+
+            <div class="insight-box">
+                <strong>Strengths:</strong> Fast, efficient, low computational cost, perfect for predictable environments.<br/>
+                <strong>Weaknesses:</strong> Fails in dynamic scenarios. Cannot handle partial or changing information. Repeats the same mistakes if rules are insufficient.
+            </div>
+        </div>
+
+        <!-- Agent 2 -->
+        <div class="agent-card">
+            <div class="agent-number">02</div>
+            <h3>Model-Based Reflex Agent</h3>
+            <p>An advancement over simple reflex agents, these agents maintain an <strong>internal model of the world</strong> and update it by observing environmental changes and the effects of their own actions.</p>
+            <p><strong>How it works:</strong> Perceive input → Update internal state model → Apply condition-action rules → Execute action</p>
+
+            <div class="agent-example">
+                <strong>Real-world example:</strong> A robotic vacuum cleaner that remembers cleaned areas, tracks obstacles, and avoids recleaning the same spot. It maintains a mental map of the room.
+            </div>
+
+            <p><strong>Enterprise integration example:</strong> An integration agent that tracks the state of multiple systems (SAP inventory, Salesforce CRM, ServiceNow tickets) and uses this context to make smarter routing decisions.</p>
+
+            <div class="insight-box">
+                <strong>Key capability:</strong> The agent doesn't just react to what it sees now—it infers and remembers parts of the environment it can't currently observe.<br/>
+                <strong>Benefit:</strong> Better decision-making because it understands context, not just raw input.
+            </div>
+        </div>
+
+        <!-- Agent 3 -->
+        <div class="agent-card">
+            <div class="agent-number">03</div>
+            <h3>Goal-Based AI Agent</h3>
+            <p>These agents add <strong>decision-making based on specific goals</strong>. Instead of just reacting, they simulate future outcomes to determine if actions help achieve their goals.</p>
+            <p><strong>How it works:</strong> Define goal → Search through possible action sequences → Simulate outcomes → Choose action most likely to achieve goal</p>
+
+            <div class="agent-example">
+                <strong>Real-world example:</strong> A self-driving car aiming to reach a destination. It doesn't just follow traffic rules—it plans a route, anticipates obstacles, and makes decisions that move it closer to the goal.
+            </div>
+
+            <p><strong>Enterprise integration example:</strong> An integration agent tasked with "consolidate customer data from 5 different systems into a single CRM record." It plans the sequence of API calls, resolves conflicts, and validates data quality.</p>
+
+            <div class="insight-box">
+                <strong>Key difference from Model-Based:</strong> Not just reacting based on current state, but actively planning actions to achieve a specific objective.
+            </div>
+        </div>
+
+        <!-- Agent 4 -->
+        <div class="agent-card">
+            <div class="agent-number">04</div>
+            <h3>Utility-Based AI Agent</h3>
+            <p>These agents consider not just if a goal is met, but also <strong>how desirable different outcomes are</strong>, using a "happiness score" or preference value.</p>
+            <p><strong>How it works:</strong> Define goal + preference weights → Evaluate all possible outcomes → Score each by utility (desirability) → Choose highest utility action</p>
+
+            <div class="agent-example">
+                <strong>Real-world example:</strong> An autonomous drone prioritizing quick, safe, AND energy-efficient package delivery. It doesn't just deliver—it optimizes across multiple competing objectives (speed, safety, cost).
+            </div>
+
+            <p><strong>Enterprise integration example:</strong> A data pipeline agent that must choose between three options:
+                <ul style="margin-left: 2rem; margin-top: 1rem; color: var(--text-muted);">
+                    <li>Option A: Fastest sync (2 min) but uses 80% server resources</li>
+                    <li>Option B: Balanced (5 min sync, 40% resources)</li>
+                    <li>Option C: Cheapest (10 min sync, 20% resources)</li>
+                </ul>
+                The utility-based agent balances cost, speed, and resource efficiency based on business priorities.
+            </p>
+
+            <div class="insight-box">
+                <strong>Real-world relevance:</strong> Most enterprise decisions aren't binary. They involve trade-offs. This agent type reflects actual business decision-making.
+            </div>
+        </div>
+
+        <!-- Agent 5 -->
+        <div class="agent-card">
+            <div class="agent-number">05</div>
+            <h3>Learning AI Agent</h3>
+            <p>The most adaptable and powerful type, learning agents <strong>improve their performance over time</strong> based on experience.</p>
+            <p><strong>How it works:</strong> 
+                <ul style="margin-left: 2rem; margin-top: 1rem; color: var(--text-muted);">
+                    <li><strong>Critic:</strong> Observes actual outcomes and compares to expected outcomes</li>
+                    <li><strong>Learning Element:</strong> Updates knowledge/strategy based on feedback</li>
+                    <li><strong>Problem Generator:</strong> Suggests new actions to explore and learn from</li>
+                </ul>
+            </p>
+
+            <div class="agent-example">
+                <strong>Real-world example:</strong> An AI chess bot that adjusts its strategy after thousands of games. Early games: random mistakes. Later games: sophisticated strategies because it learned what works.
+            </div>
+
+            <p><strong>Enterprise integration example:</strong> An intelligent data mapping agent that:
+                <ul style="margin-left: 2rem; margin-top: 1rem; color: var(--text-muted);">
+                    <li>Starts with basic field mapping rules</li>
+                    <li>Observes data quality issues and transformation errors</li>
+                    <li>Learns which transformations work best for different data types</li>
+                    <li>Gradually improves accuracy without human intervention</li>
+                </ul>
+            </p>
+
+            <div class="insight-box">
+                <strong>The future of enterprise automation:</strong> Learning agents represent the evolution from static integrations to truly adaptive systems. 
+                They don't require reconfiguration when business rules change—they learn and adapt.
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <h2 style="margin-top: 4rem;">Agent Types Comparison</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Agent Type</th>
+                    <th>Memory</th>
+                    <th>Planning</th>
+                    <th>Adaptation</th>
+                    <th>Complexity</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Simple Reflex</strong></td>
+                    <td>None</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Low</td>
+                    <td>Predictable rules</td>
+                </tr>
+                <tr>
+                    <td><strong>Model-Based Reflex</strong></td>
+                    <td>Current state</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Medium</td>
+                    <td>Stateful systems</td>
+                </tr>
+                <tr>
+                    <td><strong>Goal-Based</strong></td>
+                    <td>Current state</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td>Medium-High</td>
+                    <td>Goal achievement</td>
+                </tr>
+                <tr>
+                    <td><strong>Utility-Based</strong></td>
+                    <td>Current state</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td>High</td>
+                    <td>Multi-objective optimization</td>
+                </tr>
+                <tr>
+                    <td><strong>Learning</strong></td>
+                    <td>Full history</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Very High</td>
+                    <td>Adaptive systems</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Key Insights -->
+        <h2>Key Insights for Enterprise Integration</h2>
+
+        <div class="insight-box">
+            <h3 style="margin-top: 0; margin-bottom: 1rem;">1. Most Enterprise Systems Use a Mix</h3>
+            <p>
+                Real enterprise integrations don't use just one agent type. A sophisticated integration might use:
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Simple reflex agents</strong> for webhooks and event routing</li>
+                    <li><strong>Model-based agents</strong> for tracking multi-system state</li>
+                    <li><strong>Goal-based agents</strong> for complex data migrations</li>
+                    <li><strong>Utility-based agents</strong> for cost/performance trade-offs</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="insight-box">
+            <h3 style="margin-top: 0; margin-bottom: 1rem;">2. Human-in-the-Loop is Critical</h3>
+            <p>
+                Regardless of agent type, enterprise systems need human oversight. The video emphasizes: <strong>keep humans in the loop</strong>. 
+                For critical business processes, agents should recommend actions and let humans approve, not act autonomously without oversight.
+            </p>
+        </div>
+
+        <div class="insight-box">
+            <h3 style="margin-top: 0; margin-bottom: 1rem;">3. Agent Architecture: The Foundation</h3>
+            <p>
+                Every agent has three key components:
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Sensors (Precepts):</strong> Input from the environment (API responses, database changes, messages)</li>
+                    <li><strong>Internal Logic:</strong> Decision-making based on agent type (rules, models, goals, utility, learning)</li>
+                    <li><strong>Actuators (Actions):</strong> Output that affects the environment (API calls, database updates, notifications)</li>
+                </ul>
+                This creates a continuous feedback loop where actions influence future perceptions.
+            </p>
+        </div>
+
+        <div class="insight-box">
+            <h3 style="margin-top: 0; margin-bottom: 1rem;">4. The Path to True Agentic AI</h3>
+            <p>
+                Moving up the agent hierarchy (Simple → Learning) means:
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>More intelligence and adaptability</li>
+                    <li>More computational complexity</li>
+                    <li>More data required for training</li>
+                    <li>Greater need for human oversight and safety measures</li>
+                </ul>
+                The goal isn't to build the most complex agent—it's to match the agent type to the business problem.
+            </p>
+        </div>
+
+        <!-- Multi-Agent Systems -->
+        <h2>Multi-Agent Systems: The Future</h2>
+        <p>
+            The video concludes with an important point: <strong>multiple agents can work together</strong> in multi-agent systems. 
+            This is where enterprise integration gets really interesting.
+        </p>
+
+        <p>
+            Imagine:
+            <ul style="margin-left: 2rem;">
+                <li><strong>Agent 1 (Reflex):</strong> Monitors incoming orders from Shopify</li>
+                <li><strong>Agent 2 (Model-based):</strong> Checks inventory in SAP and Salesforce</li>
+                <li><strong>Agent 3 (Goal-based):</strong> Plans fulfillment across multiple warehouses</li>
+                <li><strong>Agent 4 (Learning):</strong> Optimizes routing based on historical performance</li>
+            </ul>
+        </p>
+
+        <p>
+            These agents work in concert, each contributing their strengths. This is the future of enterprise integration—not monolithic pipelines, but orchestrated agents with specialized skills.
+        </p>
+
+        <!-- Conclusion -->
+        <h2>The Bottom Line</h2>
+        <div class="insight-box">
+            <p>
+                Understanding these five agent types gives you a mental model for building intelligent integration systems. 
+                As we move into the era of agentic AI in enterprise integration, the ability to design, orchestrate, and oversee multi-agent systems 
+                will be the differentiator between organizations that adapt and those that fall behind.
+            </p>
+            <p style="margin-bottom: 0;">
+                <strong>Start simple.</strong> Use reflex agents for your event-driven workflows. 
+                <strong>Add intelligence gradually.</strong> Introduce model-based and goal-based agents as your needs evolve. 
+                <strong>Plan for learning.</strong> Build systems that improve over time, not just execute tasks.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="subscribe-section">
+        <div class="subscribe-content">
+            <h2>Stay Updated on Agentic AI</h2>
+            <p>Exploring how AI agents are transforming enterprise integration? Follow me to get the latest articles.</p>
+            
+            <div class="subscribe-buttons">
+                <a href="https://www.linkedin.com/in/shuvendu-chatterjee/" target="_blank" rel="noopener noreferrer" class="subscribe-btn subscribe-btn-primary">
+                    <span>→</span> Follow on LinkedIn
+                </a>
+                <a href="https://github.com/shuvenduchatterjee" target="_blank" rel="noopener noreferrer" class="subscribe-btn subscribe-btn-secondary">
+                    <span>→</span> Follow on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section class="author-section">
+        <div class="author-content">
+            <div class="author-image">
+                <img src="../images/shuvendu-headshot.jpeg" alt="Shuvendu Chatterjee">
+            </div>
+            <div class="author-bio">
+                <h3>Shuvendu Chatterjee</h3>
+                <p class="title">Senior Enterprise Integration Developer at Esri</p>
+                <p>
+                    14+ years architecting enterprise integrations and exploring the intersection of AI and integration. 
+                    Currently diving deep into agentic AI systems, MCP (Model Context Protocol), and how multi-agent architectures 
+                    will transform enterprise automation.
+                </p>
+                <p>
+                    I'm a Chino Hills State Park volunteer and passionate about building systems that are both intelligent and human-centered. 
+                    Love gaming (FC2026, Cricket 2026), analyzing cricket statistics, and planning family adventures through California's national parks.
+                </p>
+                <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(14, 165, 233, 0.1);">
+                    📚 MIT Professional Education · Applied Agentic AI for Organizational Transformation
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Shuvendu Chatterjee. Senior Enterprise Integration Developer | Agentic AI Explorer.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for back link
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
