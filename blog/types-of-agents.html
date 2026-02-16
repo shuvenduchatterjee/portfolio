@@ -475,8 +475,27 @@
         </div>
     </section>
 
+    <!-- Table of Contents -->
+    <section class="container" style="padding: 4rem 2rem; margin-bottom: 2rem;">
+        <div style="background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 12px; padding: 3rem; max-width: 900px; margin: 0 auto;">
+            <h2 style="margin-top: 0; margin-bottom: 2rem; font-size: 1.8rem;">📑 Table of Contents</h2>
+            <ul style="list-style: none; color: var(--text-muted); font-size: 1.1rem; line-height: 2;">
+                <li><a href="#overview" style="color: var(--electric-blue); text-decoration: none;">→ Overview & Introduction</a></li>
+                <li><a href="#agent-1" style="color: var(--electric-blue); text-decoration: none;">→ 1. Simple Reflex Agent</a></li>
+                <li><a href="#agent-2" style="color: var(--electric-blue); text-decoration: none;">→ 2. Model-Based Reflex Agent</a></li>
+                <li><a href="#agent-3" style="color: var(--electric-blue); text-decoration: none;">→ 3. Goal-Based AI Agent</a></li>
+                <li><a href="#agent-4" style="color: var(--electric-blue); text-decoration: none;">→ 4. Utility-Based AI Agent</a></li>
+                <li><a href="#agent-5" style="color: var(--electric-blue); text-decoration: none;">→ 5. Learning AI Agent</a></li>
+                <li><a href="#comparison" style="color: var(--electric-blue); text-decoration: none;">→ Agent Types Comparison Table</a></li>
+                <li><a href="#insights" style="color: var(--electric-blue); text-decoration: none;">→ Key Insights for Enterprise Integration</a></li>
+                <li><a href="#multi-agent" style="color: var(--electric-blue); text-decoration: none;">→ Multi-Agent Systems: The Future</a></li>
+                <li><a href="#conclusion" style="color: var(--electric-blue); text-decoration: none;">→ The Bottom Line</a></li>
+            </ul>
+        </div>
+    </section>
+
     <!-- Main Content -->
-    <section class="container">
+    <section class="container" id="overview">
         <div class="content-block">
             <p>
                 As we explore agentic AI for enterprise integration, it's crucial to understand the different types of AI agents and how they make decisions. 
@@ -488,7 +507,7 @@
         <h2>The Five Types of AI Agents</h2>
 
         <!-- Agent 1 -->
-        <div class="agent-card">
+        <div class="agent-card" id="agent-1">
             <div class="agent-number">01</div>
             <h3>Simple Reflex Agent</h3>
             <p>The foundational agent type, simple reflex agents operate on <strong>predefined if-then rules</strong> without memory of past states.</p>
@@ -507,7 +526,7 @@
         </div>
 
         <!-- Agent 2 -->
-        <div class="agent-card">
+        <div class="agent-card" id="agent-2">
             <div class="agent-number">02</div>
             <h3>Model-Based Reflex Agent</h3>
             <p>An advancement over simple reflex agents, these agents maintain an <strong>internal model of the world</strong> and update it by observing environmental changes and the effects of their own actions.</p>
@@ -526,7 +545,7 @@
         </div>
 
         <!-- Agent 3 -->
-        <div class="agent-card">
+        <div class="agent-card" id="agent-3">
             <div class="agent-number">03</div>
             <h3>Goal-Based AI Agent</h3>
             <p>These agents add <strong>decision-making based on specific goals</strong>. Instead of just reacting, they simulate future outcomes to determine if actions help achieve their goals.</p>
@@ -544,7 +563,7 @@
         </div>
 
         <!-- Agent 4 -->
-        <div class="agent-card">
+        <div class="agent-card" id="agent-4">
             <div class="agent-number">04</div>
             <h3>Utility-Based AI Agent</h3>
             <p>These agents consider not just if a goal is met, but also <strong>how desirable different outcomes are</strong>, using a "happiness score" or preference value.</p>
@@ -569,7 +588,7 @@
         </div>
 
         <!-- Agent 5 -->
-        <div class="agent-card">
+        <div class="agent-card" id="agent-5">
             <div class="agent-number">05</div>
             <h3>Learning AI Agent</h3>
             <p>The most adaptable and powerful type, learning agents <strong>improve their performance over time</strong> based on experience.</p>
@@ -601,7 +620,7 @@
         </div>
 
         <!-- Comparison Table -->
-        <h2 style="margin-top: 4rem;">Agent Types Comparison</h2>
+        <h2 style="margin-top: 4rem;" id="comparison">Agent Types Comparison</h2>
         <table class="comparison-table">
             <thead>
                 <tr>
@@ -658,7 +677,7 @@
         </table>
 
         <!-- Key Insights -->
-        <h2>Key Insights for Enterprise Integration</h2>
+        <h2 id="insights">Key Insights for Enterprise Integration</h2>
 
         <div class="insight-box">
             <h3 style="margin-top: 0; margin-bottom: 1rem;">1. Most Enterprise Systems Use a Mix</h3>
@@ -709,7 +728,7 @@
         </div>
 
         <!-- Multi-Agent Systems -->
-        <h2>Multi-Agent Systems: The Future</h2>
+        <h2 id="multi-agent">Multi-Agent Systems: The Future</h2>
         <p>
             The video concludes with an important point: <strong>multiple agents can work together</strong> in multi-agent systems. 
             This is where enterprise integration gets really interesting.
@@ -730,7 +749,7 @@
         </p>
 
         <!-- Conclusion -->
-        <h2>The Bottom Line</h2>
+        <h2 id="conclusion">The Bottom Line</h2>
         <div class="insight-box">
             <p>
                 Understanding these five agent types gives you a mental model for building intelligent integration systems. 
