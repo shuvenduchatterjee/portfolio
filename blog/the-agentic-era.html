@@ -23,6 +23,8 @@
             --accent-glow: rgba(0, 212, 255, 0.3);
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
             background: var(--bg-dark);
             color: var(--text-primary);
@@ -55,6 +57,7 @@
             background: radial-gradient(circle at 30% 50%, rgba(179, 102, 255, 0.1) 0%, transparent 50%),
                         radial-gradient(circle at 70% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
             animation: pulse 8s ease-in-out infinite;
+            z-index: 1;
         }
 
         @keyframes pulse {
@@ -99,14 +102,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .scroll-indicator {
@@ -115,6 +112,7 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            z-index: 3;
         }
 
         @keyframes bounce {
@@ -130,9 +128,19 @@
 
         /* Section Base */
         section {
-            min-height: 100vh;
-            padding: 6rem 2rem;
             position: relative;
+            padding: 8rem 2rem;
+            min-height: auto;
+        }
+
+        section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
         }
 
         .container {
@@ -146,31 +154,26 @@
             color: var(--electric-cyan);
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
 
         .section-title {
             font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 600;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            line-height: 1.2;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        section.visible .section-label,
-        section.visible .section-title,
-        section.visible .content-block {
-            opacity: 1;
-            transform: translateY(0);
+            animation: fadeInUp 0.8s ease 0.1s forwards;
         }
 
         .content-block {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease 0.2s;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
         /* The Old World */
@@ -180,33 +183,34 @@
 
         .pipeline-visual {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
             margin: 4rem 0;
-            padding: 3rem;
+            padding: 3rem 2rem;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 16px;
         }
 
         .pipeline-node {
             text-align: center;
             padding: 2rem 1rem;
             background: rgba(139, 149, 168, 0.05);
-            border-radius: 8px;
+            border-radius: 12px;
             border: 2px solid rgba(139, 149, 168, 0.2);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .pipeline-node:hover {
             border-color: var(--electric-blue);
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-5px);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-8px) scale(1.05);
         }
 
         .node-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
+            display: block;
         }
 
         .node-label {
@@ -221,85 +225,100 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .pain-point {
-            padding: 2rem;
-            background: rgba(255, 0, 0, 0.05);
-            border-left: 3px solid rgba(255, 0, 0, 0.3);
-            border-radius: 8px;
+            padding: 2.5rem;
+            background: rgba(255, 0, 0, 0.03);
+            border-left: 4px solid rgba(255, 100, 100, 0.4);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .pain-point:hover {
+            background: rgba(255, 0, 0, 0.08);
+            border-left-color: rgba(255, 100, 100, 0.8);
+            transform: translateX(5px);
         }
 
         .pain-point-title {
             font-family: 'JetBrains Mono', monospace;
             color: var(--electric-cyan);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         /* The Awakening */
         .awakening {
-            background: radial-gradient(circle at 50% 50%, rgba(179, 102, 255, 0.05) 0%, transparent 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(179, 102, 255, 0.05) 50%, transparent 100%);
         }
 
         .timeline {
             position: relative;
-            padding-left: 4rem;
+            padding-left: 5rem;
             margin: 4rem 0;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 0;
+            left: 1.5rem;
             top: 0;
             width: 2px;
             height: 100%;
-            background: linear-gradient(180deg, var(--electric-cyan) 0%, var(--electric-purple) 100%);
+            background: linear-gradient(180deg, var(--electric-cyan), var(--electric-purple), transparent);
         }
 
         .timeline-item {
             position: relative;
             margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateX(-30px);
+            padding: 2rem;
+            background: rgba(0, 212, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.05);
             transition: all 0.6s ease;
         }
 
-        section.visible .timeline-item {
-            opacity: 1;
-            transform: translateX(0);
+        .timeline-item:hover {
+            background: rgba(0, 212, 255, 0.05);
+            border-color: rgba(0, 212, 255, 0.15);
+            transform: translateX(10px);
         }
-
-        .timeline-item:nth-child(1) { transition-delay: 0.1s; }
-        .timeline-item:nth-child(2) { transition-delay: 0.2s; }
-        .timeline-item:nth-child(3) { transition-delay: 0.3s; }
-        .timeline-item:nth-child(4) { transition-delay: 0.4s; }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -4.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            background: var(--electric-cyan);
+            left: -3.5rem;
+            top: 2.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 3px solid var(--electric-cyan);
             border-radius: 50%;
             box-shadow: 0 0 20px var(--electric-cyan);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover::before {
+            box-shadow: 0 0 40px var(--electric-cyan);
+            transform: scale(1.3);
         }
 
         .timeline-date {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--electric-purple);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
         }
 
         .timeline-title {
             font-size: 1.8rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             color: var(--electric-cyan);
         }
 
@@ -307,28 +326,30 @@
             font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-muted);
+            margin-bottom: 1rem;
         }
 
         .insight-box {
             margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: rgba(0, 212, 255, 0.05);
-            border-left: 3px solid var(--electric-cyan);
-            border-radius: 8px;
+            padding: 1.75rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(179, 102, 255, 0.05));
+            border-left: 4px solid var(--electric-cyan);
+            border-radius: 12px;
             font-style: italic;
+            border: 1px solid rgba(0, 212, 255, 0.1);
         }
 
         /* The Build */
         .the-build {
-            background: var(--bg-darker);
+            background: linear-gradient(180deg, var(--bg-darker) 0%, rgba(0, 212, 255, 0.02) 50%, var(--bg-darker) 100%);
         }
 
         .architecture-diagram {
             margin: 4rem 0;
             padding: 3rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
             border-radius: 16px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -356,38 +377,42 @@
         }
 
         .arch-layer {
-            padding: 2rem;
+            padding: 2.5rem;
             margin-bottom: 2rem;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
             border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .arch-layer:hover {
             border-color: var(--electric-cyan);
             box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateX(10px);
+            transform: translateX(10px) translateY(-5px);
+            background: rgba(0, 212, 255, 0.05);
         }
 
         .layer-title {
             font-family: 'JetBrains Mono', monospace;
             color: var(--electric-cyan);
             font-size: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
+            font-weight: 600;
         }
 
         .layer-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--accent-glow);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         .layer-components {
@@ -398,75 +423,83 @@
         }
 
         .component-tag {
-            padding: 0.5rem 1rem;
-            background: rgba(0, 255, 204, 0.1);
+            padding: 0.6rem 1.2rem;
+            background: rgba(0, 255, 204, 0.08);
             border: 1px solid rgba(0, 255, 204, 0.3);
-            border-radius: 20px;
+            border-radius: 24px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
             color: var(--electric-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .component-tag:hover {
+            background: rgba(0, 255, 204, 0.15);
+            border-color: var(--electric-cyan);
         }
 
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin: 4rem 0;
         }
 
         .metric-card {
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(179, 102, 255, 0.05));
-            border-radius: 12px;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(179, 102, 255, 0.08));
+            border-radius: 16px;
             border: 1px solid rgba(0, 212, 255, 0.2);
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px var(--accent-glow);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px var(--accent-glow);
+            border-color: var(--electric-cyan);
         }
 
         .metric-value {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             background: linear-gradient(135deg, var(--electric-cyan), var(--electric-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .metric-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         /* The New Era */
         .new-era {
-            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
-            padding-bottom: 10rem;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 100%);
+            padding: 10rem 2rem;
         }
 
         .vision-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 3rem;
             margin-top: 4rem;
         }
 
         .vision-card {
-            padding: 3rem;
+            padding: 3.5rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
-            transition: all 0.6s ease;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .vision-card::before {
@@ -489,15 +522,17 @@
         .vision-card:hover {
             border-color: var(--electric-cyan);
             box-shadow: 0 20px 60px var(--accent-glow);
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            background: rgba(0, 212, 255, 0.05);
         }
 
         .vision-number {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: 700;
-            color: rgba(0, 212, 255, 0.2);
-            margin-bottom: 1rem;
+            color: rgba(0, 212, 255, 0.15);
+            margin-bottom: 1.5rem;
+            line-height: 1;
         }
 
         .vision-title {
@@ -516,14 +551,16 @@
         /* Final CTA */
         .final-section {
             text-align: center;
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.05));
+            padding: 10rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.05), transparent);
+            position: relative;
         }
 
         .final-title {
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 600;
             margin-bottom: 2rem;
+            line-height: 1.2;
             background: linear-gradient(135deg, var(--electric-cyan), var(--electric-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -533,18 +570,19 @@
         .final-text {
             font-size: 1.5rem;
             color: var(--text-muted);
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.9;
         }
 
         .author-credit {
             margin-top: 4rem;
-            padding-top: 2rem;
+            padding-top: 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
         }
 
@@ -555,28 +593,20 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .pipeline-visual {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .timeline {
-                padding-left: 2rem;
-            }
-
-            .timeline-item::before {
-                left: -2.5rem;
-            }
-
-            .vision-grid {
-                grid-template-columns: 1fr;
-            }
+            section { padding: 4rem 1.5rem; }
+            .pipeline-visual { grid-template-columns: repeat(2, 1fr); padding: 2rem 1rem; }
+            .timeline { padding-left: 3rem; }
+            .timeline-item::before { left: -2rem; }
+            .vision-grid { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 2.5rem; }
         }
 
-        /* Parallax effect helper */
-        [data-parallax] {
-            transition: transform 0.1s ease-out;
-        }
+        /* Smooth intro animations */
+        section:nth-child(1) .section-label { animation-delay: 0s; }
+        section:nth-child(2) .section-label { animation-delay: 0s; }
+        section:nth-child(3) .section-label { animation-delay: 0s; }
+        section:nth-child(4) .section-label { animation-delay: 0s; }
     </style>
 </head>
 <body>
@@ -593,7 +623,7 @@
     </section>
 
     <!-- The Old World -->
-    <section class="old-world" id="old-world">
+    <section class="old-world">
         <div class="container">
             <div class="section-label">Chapter 01</div>
             <h2 class="section-title">The Old World:<br/>When Everything Was a Pipeline</h2>
@@ -608,7 +638,7 @@
                 <div class="pipeline-visual">
                     <div class="pipeline-node">
                         <div class="node-icon">🗄️</div>
-                        <div class="node-label">Source System</div>
+                        <div class="node-label">Source</div>
                     </div>
                     <div class="pipeline-node">
                         <div class="node-icon">⚙️</div>
@@ -624,11 +654,11 @@
                     </div>
                     <div class="pipeline-node">
                         <div class="node-icon">📊</div>
-                        <div class="node-label">Target System</div>
+                        <div class="node-label">Target</div>
                     </div>
                 </div>
 
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem; color: var(--text-muted);">
+                <p style="font-size: 1.2rem; line-height: 1.8; margin: 3rem 0 2rem; color: var(--text-muted);">
                     Every integration was a custom pipeline. Hand-coded. Brittle. Beautiful in its precision, exhausting in its rigidity.
                 </p>
 
@@ -654,75 +684,8 @@
         </div>
     </section>
 
-    <!-- The Awakening -->
-    <section class="awakening" id="awakening">
-        <div class="container">
-            <div class="section-label">Chapter 03</div>
-            <h2 class="section-title">The Awakening:<br/>Understanding What I Built</h2>
-
-            <div class="content-block">
-                <p style="font-size: 1.3rem; line-height: 1.9; margin-bottom: 3rem; max-width: 900px;">
-                    January 26, 2026. The demo was live. The system worked. But I had questions. What were the theoretical foundations?
-                    What patterns was I following without knowing it? Where were the blind spots? I enrolled in MIT Professional Education's
-                    <strong style="color: var(--electric-cyan);">"Applied Agentic AI for Organizational Transformation"</strong> —
-                    not to learn how to build, but to understand the paradigm I was operating in.
-                </p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Module 1 · Foundations</div>
-                        <div class="timeline-title">Beyond Chatbots</div>
-                        <div class="timeline-description">
-                            Generative AI wasn't new to me. But <strong>agentic AI</strong> — systems that can autonomously
-                            plan, decide, and act? That shifted everything. This wasn't about generating text.
-                            This was about systems that could <em>orchestrate workflows</em> without human intervention.
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Module 2 · The Platforms</div>
-                        <div class="timeline-title">The Cambrian Explosion</div>
-                        <div class="timeline-description">
-                            LangChain. CrewAI. Multi-agent architectures. <strong>Vibe coding</strong> — Andrej Karpathy's vision
-                            where anyone could describe what they want and get working code back. The tooling landscape
-                            was wild, chaotic, powerful. The question wasn't "can this be done?" but "which path do we take?"
-                        </div>
-                        <div class="insight-box">
-                            "Only 10% of current LLM capabilities are being utilized. The bottleneck isn't the model — it's human creativity."
-                            — Andre Karpathy
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Module 3 · The Integration Layer</div>
-                        <div class="timeline-title">MCP: The USB-C for AI</div>
-                        <div class="timeline-description">
-                            Then came the <strong>Model Context Protocol</strong>. A standardized way for AI agents to connect to
-                            *anything* — databases, APIs, enterprise systems. Think of it as USB-C for AI. One protocol,
-                            infinite connections. This was the missing piece for enterprise integration.
-                        </div>
-                        <div class="insight-box">
-                            Instead of building custom integrations for every system, MCP gives agents a universal interface.
-                            Natural language becomes the new API.
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Key Insight</div>
-                        <div class="timeline-title">The Knight Capital Lesson</div>
-                        <div class="timeline-description">
-                            Human-in-the-loop isn't just best practice — it's survival. In 2012, Knight Capital's automated
-                            trading system went rogue for 45 minutes. <strong style="color: #ff4444;">$440 million lost</strong>.
-                            The company never recovered. Agents need guardrails, checkpoints, and human oversight for critical decisions.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- The Build -->
-    <section class="the-build" id="the-build">
+    <section class="the-build">
         <div class="container">
             <div class="section-label">Chapter 02</div>
             <h2 class="section-title">The Build:<br/>Building Before Understanding</h2>
@@ -731,8 +694,7 @@
                 <p style="font-size: 1.3rem; line-height: 1.9; margin-bottom: 3rem; max-width: 900px;">
                     December 11, 2025. I presented to Esri's IST Integrations team. Not a proof of concept —
                     a working system that showed what enterprise integration could become when it thinks.
-                    I built it on instinct, on 14 years of knowing what was broken. But I didn't yet have the framework to understand
-                    <strong style="color: var(--electric-cyan);">what I'd actually created</strong>.
+                    I built it on instinct, on 14 years of knowing what was broken.
                 </p>
 
                 <div class="architecture-diagram">
@@ -755,11 +717,11 @@
                                 <span>MuleSoft MCP Policies</span>
                             </div>
                             <div class="layer-components">
-                                <span class="component-tag">PII Detection/Blocking</span>
-                                <span class="component-tag">OAuth 2.0 JWT Validation</span>
+                                <span class="component-tag">PII Detection</span>
+                                <span class="component-tag">OAuth 2.0 JWT</span>
                                 <span class="component-tag">Rate Limiting</span>
                                 <span class="component-tag">Spike Control</span>
-                                <span class="component-tag">Client ID Enforcement</span>
+                                <span class="component-tag">Client ID</span>
                             </div>
                         </div>
 
@@ -772,7 +734,7 @@
                                 <span class="component-tag">order-mcp</span>
                                 <span class="component-tag">customer-mcp</span>
                                 <span class="component-tag">product-mcp</span>
-                                <span class="component-tag">myps-mcp (GIS)</span>
+                                <span class="component-tag">myps-mcp</span>
                             </div>
                         </div>
 
@@ -784,7 +746,7 @@
                             <div class="layer-components">
                                 <span class="component-tag">SAP APIs</span>
                                 <span class="component-tag">Salesforce</span>
-                                <span class="component-tag">ArcGIS REST API</span>
+                                <span class="component-tag">ArcGIS REST</span>
                                 <span class="component-tag">MongoDB</span>
                             </div>
                         </div>
@@ -793,15 +755,14 @@
 
                 <h3 style="font-size: 2rem; margin: 4rem 0 2rem; color: var(--electric-cyan);">The Demo: Natural Language GIS Orchestration</h3>
 
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem; padding: 2rem; background: rgba(0, 212, 255, 0.05); border-left: 4px solid var(--electric-cyan); border-radius: 8px;">
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem; padding: 2rem; background: rgba(0, 212, 255, 0.05); border-left: 4px solid var(--electric-cyan); border-radius: 12px;">
                     <strong style="font-family: 'JetBrains Mono', monospace; color: var(--electric-cyan);">User Query:</strong><br/>
                     "Show me active construction projects within 5 miles of fire stations built before 1980, and generate a risk assessment."
                 </p>
 
                 <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 3rem; color: var(--text-muted);">
                     The agent understood the intent, orchestrated spatial queries across ArcGIS, cross-referenced building data,
-                    applied temporal filters, calculated distances, and generated a comprehensive risk assessment —
-                    all from a natural language prompt. No custom integration needed.
+                    applied temporal filters, calculated distances, and generated a comprehensive risk assessment.
                 </p>
 
                 <h3 style="font-size: 2rem; margin: 4rem 0 2rem; color: var(--electric-cyan);">Impact Metrics</h3>
@@ -821,29 +782,84 @@
                     </div>
                     <div class="metric-card">
                         <div class="metric-value">∞</div>
-                        <div class="metric-label">Non-Technical Users Empowered</div>
+                        <div class="metric-label">Non-Technical Users</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <h3 style="font-size: 2rem; margin: 4rem 0 2rem; color: var(--electric-cyan);">What Actually Changed</h3>
+    <!-- The Awakening -->
+    <section class="awakening">
+        <div class="container">
+            <div class="section-label">Chapter 03</div>
+            <h2 class="section-title">The Awakening:<br/>Understanding What I Built</h2>
 
-                <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-muted);">
-                    <strong style="color: var(--text-primary);">Before:</strong> A GIS analyst would spend 2-3 hours writing spatial queries,
-                    coordinating with the integration team, waiting for custom workflows to be built.<br/><br/>
-                    <strong style="color: var(--text-primary);">After:</strong> They ask. The agent orchestrates. Results in minutes.
+            <div class="content-block">
+                <p style="font-size: 1.3rem; line-height: 1.9; margin-bottom: 3rem; max-width: 900px;">
+                    January 26, 2026. The demo was live. The system worked. But I had questions. I enrolled in MIT Professional Education's
+                    <strong style="color: var(--electric-cyan);">"Applied Agentic AI for Organizational Transformation"</strong> —
+                    not to learn how to build, but to understand the paradigm I was operating in.
                 </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Module 1 · Foundations</div>
+                        <div class="timeline-title">Beyond Chatbots</div>
+                        <div class="timeline-description">
+                            Generative AI wasn't new to me. But <strong>agentic AI</strong> — systems that can autonomously
+                            plan, decide, and act? That shifted everything. This wasn't about generating text.
+                            This was about systems that could <em>orchestrate workflows</em> without human intervention.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Module 2 · The Platforms</div>
+                        <div class="timeline-title">The Cambrian Explosion</div>
+                        <div class="timeline-description">
+                            LangChain. CrewAI. Multi-agent architectures. The tooling landscape was wild, chaotic, powerful.
+                            The question wasn't "can this be done?" but "which path do we take?"
+                        </div>
+                        <div class="insight-box">
+                            "Only 10% of current LLM capabilities are being utilized. The bottleneck isn't the model — it's human creativity." — Andre Karpathy
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Module 3 · The Integration Layer</div>
+                        <div class="timeline-title">MCP: The USB-C for AI</div>
+                        <div class="timeline-description">
+                            Then came the <strong>Model Context Protocol</strong>. A standardized way for AI agents to connect to
+                            *anything* — databases, APIs, enterprise systems. Think of it as USB-C for AI.
+                        </div>
+                        <div class="insight-box">
+                            Instead of building custom integrations for every system, MCP gives agents a universal interface.
+                            Natural language becomes the new API.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Key Insight</div>
+                        <div class="timeline-title">The Knight Capital Lesson</div>
+                        <div class="timeline-description">
+                            Human-in-the-loop isn't just best practice — it's survival. In 2012, Knight Capital's automated
+                            trading system went rogue for 45 minutes. <strong style="color: #ff6464;">$440 million lost</strong>.
+                            Agents need guardrails, checkpoints, and human oversight.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- The New Era -->
-    <section class="new-era" id="new-era">
+    <section class="new-era">
         <div class="container">
             <div class="section-label">Chapter 04</div>
             <h2 class="section-title">The New Era:<br/>Where We're Going</h2>
 
             <div class="content-block">
-                <p style="font-size: 1.3rem; line-height: 1.9; margin-bottom: 3rem; max-width: 900px;">
+                <p style="font-size: 1.3rem; line-height: 1.9; margin-bottom: 4rem; max-width: 900px;">
                     This wasn't the destination. It was the first step. The real transformation happens when we move from
                     single agents answering queries to <strong style="color: var(--electric-cyan);">ecosystems of agents collaborating</strong>
                     to solve complex enterprise challenges.
@@ -855,8 +871,7 @@
                         <div class="vision-title">Multi-Agent Orchestration</div>
                         <div class="vision-description">
                             Specialized agents working together — one handles spatial queries, another manages
-                            compliance checks, another optimizes resource allocation. They negotiate, collaborate,
-                            and converge on optimal solutions.
+                            compliance checks, another optimizes resource allocation.
                         </div>
                     </div>
 
@@ -865,7 +880,7 @@
                         <div class="vision-title">Predictive Intelligence</div>
                         <div class="vision-description">
                             Moving beyond reactive responses. Agents that analyze patterns, predict infrastructure needs,
-                            identify risks before they materialize. The system doesn't just answer questions — it asks them.
+                            identify risks before they materialize.
                         </div>
                     </div>
 
@@ -874,8 +889,7 @@
                         <div class="vision-title">Field Operations Integration</div>
                         <div class="vision-description">
                             Real-time agents on mobile devices. Field technicians ask questions, get instant answers
-                            grounded in live GIS data, work orders from ServiceNow, asset data from SAP.
-                            The enterprise knowledge graph in their pocket.
+                            grounded in live GIS data and enterprise systems.
                         </div>
                     </div>
 
@@ -883,9 +897,8 @@
                         <div class="vision-number">04</div>
                         <div class="vision-title">Cross-Department Coordination</div>
                         <div class="vision-description">
-                            Breaking down silos. An agent from Finance talking to an agent from Operations,
-                            both pulling from shared data lakes, making coordinated decisions that optimize
-                            across organizational boundaries.
+                            Breaking down silos. Agents from Finance talking to agents from Operations,
+                            making coordinated decisions across organizational boundaries.
                         </div>
                     </div>
 
@@ -893,8 +906,8 @@
                         <div class="vision-number">05</div>
                         <div class="vision-title">The Vertical AI Shift</div>
                         <div class="vision-description">
-                            Industry trends are clear: vertical AI is eating horizontal tools. The "Palantirization of Everything" —
-                            specialized, context-aware systems that understand domain-specific workflows, regulations, and needs.
+                            Industry trends are clear: vertical AI is eating horizontal tools. Specialized, context-aware systems
+                            that understand domain-specific workflows and regulations.
                         </div>
                     </div>
 
@@ -933,29 +946,34 @@
     <script>
         // Intersection Observer for scroll animations
         const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
+        document.querySelectorAll('.section-label, .section-title, .content-block').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
         });
 
-        // Simple parallax effect
+        // Smooth parallax effect
         document.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const x = (clientX / window.innerWidth - 0.5) * 20;
-            const y = (clientY / window.innerHeight - 0.5) * 20;
-
-            document.querySelector('.hero-bg').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) {
+                const { clientX, clientY } = e;
+                const x = (clientX / window.innerWidth - 0.5) * 20;
+                const y = (clientY / window.innerHeight - 0.5) * 20;
+                heroBg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+            }
         });
 
         // Smooth scroll
