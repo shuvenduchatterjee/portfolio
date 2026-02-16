@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shuvendu Chatterjee - Senior Enterprise Integration Developer</title>
+    <title>Shuvendu Chatterjee - Senior Enterprise Integration Developer | Agentic AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -286,6 +286,107 @@
             line-height: 1.8;
         }
 
+        /* EXPERTISE GRID */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-card {
+            background: rgba(26, 31, 58, 0.4);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 0.75rem;
+            padding: 2.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .expertise-card:hover {
+            background: rgba(26, 31, 58, 0.7);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .expertise-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(14, 165, 233, 0.1);
+            border: 2px solid rgba(14, 165, 233, 0.3);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .expertise-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* SKILLS */
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(26, 31, 58, 0.3);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 0.75rem;
+            padding: 2rem;
+        }
+
+        .skill-category-title {
+            color: var(--accent);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-category-title::before {
+            content: '';
+            width: 3px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill {
+            background: rgba(14, 165, 233, 0.08);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(14, 165, 233, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .skill:hover {
+            background: rgba(14, 165, 233, 0.15);
+            border-color: var(--accent);
+        }
+
         /* TIMELINE */
         .timeline {
             position: relative;
@@ -347,54 +448,6 @@
             line-height: 1.8;
         }
 
-        /* SKILLS */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            border-radius: 0.75rem;
-            padding: 2rem;
-        }
-
-        .skill-card h4 {
-            color: var(--accent);
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .skill-card h4::before {
-            content: '';
-            width: 3px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .skill-tag {
-            background: rgba(14, 165, 233, 0.08);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 0.35rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(14, 165, 233, 0.15);
-        }
-
         /* CONTACT */
         .contact-section {
             text-align: center;
@@ -451,7 +504,7 @@
                 font-size: 2.5rem;
             }
 
-            .section {
+            section {
                 padding: 4rem 1rem;
             }
 
@@ -492,8 +545,9 @@
         <div class="nav-container">
             <div class="logo">SC</div>
             <ul class="nav-links">
-                <li><a href="#experience">Experience</a></li>
+                <li><a href="#expertise">Expertise</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -504,7 +558,7 @@
         <div class="hero-content">
             <div class="hero-tag">SENIOR ENTERPRISE INTEGRATION DEVELOPER</div>
             <h1>Building <span class="highlight">enterprise integration solutions</span></h1>
-            <p class="hero-subtitle">13+ years architecting mission-critical integrations. Expert in BizTalk, MuleSoft, Oracle. Recently promoted to Senior level. Latest: Exploring Agentic AI for intelligent enterprise integration.</p>
+            <p class="hero-subtitle">14+ years architecting mission-critical integrations. Expert in BizTalk, MuleSoft, Oracle. Recently promoted to Senior level. Latest: Exploring Agentic AI for intelligent enterprise integration.</p>
             
             <div class="hero-metrics">
                 <div class="metric">
@@ -532,6 +586,138 @@
         </div>
     </section>
 
+    <!-- Expertise Section -->
+    <section id="expertise">
+        <div class="section-header">
+            <div class="section-tag">Core Expertise</div>
+            <h2 class="section-title">What I <span class="accent">Know</span></h2>
+        </div>
+
+        <div class="expertise-grid">
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🏗️</div>
+                <h3>Enterprise Integration</h3>
+                <p>API-led architecture, hub-and-spoke patterns, event-driven systems. 120+ production integrations designed and maintained at scale. Consistent 95%+ SLA achievement.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">☁️</div>
+                <h3>Platform Modernization</h3>
+                <p>Java 8→17 migrations, OAuth provider migrations, CloudHub platform upgrades. Zero-downtime deployments. 5+ major migrations led successfully.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🔐</div>
+                <h3>Security & OAuth</h3>
+                <p>OAuth 2.0 implementation, Okta & Azure Entra ID integration, API security standards, client authentication patterns, data protection.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">📊</div>
+                <h3>Data & ETL Integration</h3>
+                <p>Azure Data Factory, Microsoft Fabric, SSIS (SQL Server Integration Services). Data pipeline design, ETL/ELT processes, data transformation, real-time data integration.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">📊</div>
+                <h3>Monitoring & Reliability</h3>
+                <p>AnyPoint Monitoring, Dynatrace, Splunk. 95%+ SLA achievement through proactive monitoring, trend analysis, and performance optimization.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🤖</div>
+                <h3>Agentic AI Integration</h3>
+                <p>Multi-agent systems, MCP (Model Context Protocol), AgentFabric patterns, agent orchestration, intelligent automation, autonomous integration workflows.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">💡</div>
+                <h3>Latest: Agentic AI</h3>
+                <p>Claude API, prompt engineering, intelligent agent design, multi-agent orchestration, MCP implementation, autonomous enterprise automation patterns.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-tag">Technical Stack</div>
+            <h2 class="section-title">Languages & <span class="accent">Technologies</span></h2>
+        </div>
+
+        <div class="skills-section">
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Data & Integration Platforms</h4>
+                <div class="skill-list">
+                    <span class="skill">Azure Data Factory</span>
+                    <span class="skill">Microsoft Fabric</span>
+                    <span class="skill">SSIS (SQL Server Integration Services)</span>
+                    <span class="skill">BizTalk Server</span>
+                    <span class="skill">MuleSoft AnyPoint</span>
+                    <span class="skill">CloudHub 1.0 & 2.0</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Programming Languages</h4>
+                <div class="skill-list">
+                    <span class="skill">C# / ASP.NET</span>
+                    <span class="skill">Oracle PL/SQL</span>
+                    <span class="skill">SQL Server / T-SQL</span>
+                    <span class="skill">Java</span>
+                    <span class="skill">DataWeave</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Cloud & Databases</h4>
+                <div class="skill-list">
+                    <span class="skill">Azure (Primary)</span>
+                    <span class="skill">AWS</span>
+                    <span class="skill">Oracle Database</span>
+                    <span class="skill">SQL Server</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Security & Monitoring</h4>
+                <div class="skill-list">
+                    <span class="skill">OAuth 2.0</span>
+                    <span class="skill">Okta</span>
+                    <span class="skill">Azure Entra ID</span>
+                    <span class="skill">AnyPoint Monitoring</span>
+                    <span class="skill">Dynatrace</span>
+                    <span class="skill">Splunk</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Agentic AI & Latest Skills</h4>
+                <div class="skill-list">
+                    <span class="skill">Agentic AI Systems</span>
+                    <span class="skill">MCP (Model Context Protocol)</span>
+                    <span class="skill">AgentFabric</span>
+                    <span class="skill">Claude API</span>
+                    <span class="skill">Multi-Agent Orchestration</span>
+                    <span class="skill">Prompt Engineering</span>
+                    <span class="skill">Intelligent Automation</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Enterprise Clients</h4>
+                <div class="skill-list">
+                    <span class="skill">PNC Bank</span>
+                    <span class="skill">Direct Energy</span>
+                    <span class="skill">Home Warranty of America</span>
+                    <span class="skill">Mr. Sparky</span>
+                    <span class="skill">TransAlta, Canada</span>
+                    <span class="skill">Esri</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
     <section id="experience">
         <div class="section-header">
@@ -544,7 +730,7 @@
                 <h3>Senior Enterprise Integration Developer</h3>
                 <div class="timeline-company">Esri</div>
                 <div class="timeline-date">2023 – Present</div>
-                <p class="timeline-description">Promoted to Senior level in 2023. Architecting 120+ production integrations with 95%+ SLA. Led 3 major migrations: Java 8→17 (platform modernization), Okta→Entra ID (OAuth provider), CloudHub 1.0→2.0 (platform upgrade). Exploring Agentic AI patterns for intelligent enterprise automation.</p>
+                <p class="timeline-description">Promoted to Senior level in 2023. Architecting 120+ production integrations with 95%+ SLA. Led 3 major migrations: Java 8→17 (platform modernization), Okta→Entra ID (OAuth provider), CloudHub 1.0→2.0 (platform upgrade). Exploring Agentic AI, MCP, and AgentFabric patterns for intelligent enterprise automation.</p>
             </div>
 
             <div class="timeline-item fade-in">
@@ -556,98 +742,23 @@
 
             <div class="timeline-item fade-in">
                 <h3>Senior Developer</h3>
-                <div class="timeline-company">TCS (Tata Consultancy Services)</div>
+                <div class="timeline-company">Tata Consultancy Services</div>
                 <div class="timeline-date">July 2014 – May 2019</div>
-                <p class="timeline-description">Developed mission-critical integration solutions using BizTalk and Oracle PL/SQL. Delivered integration solutions for TransAlta, Canada. Architected scalable enterprise platforms using Azure Logic App and hybrid applications. 5 years of enterprise integration expertise.</p>
+                <p class="timeline-description"><strong>Direct Energy (2017-2019):</strong> Developed mission-critical integration solutions for Direct Energy Retail Services, Home Warranty of America, Mr. Sparky. <strong>2014-2017:</strong> Architected enterprise integration platforms using BizTalk and Oracle PL/SQL. Delivered solutions for TransAlta, Canada. Implemented Azure Logic App and hybrid applications.</p>
             </div>
 
             <div class="timeline-item fade-in">
                 <h3>Integration Developer</h3>
-                <div class="timeline-company">TCS (Tata Consultancy Services)</div>
+                <div class="timeline-company">Tata Consultancy Services</div>
                 <div class="timeline-date">April 2012 – July 2014</div>
                 <p class="timeline-description">Led WebMethods to BizTalk migration for PNC Bank banking integration solution. Implemented critical banking integrations. Learned and mastered BizTalk Server. Delivered mission-critical platform supporting PNC Bank operations.</p>
             </div>
 
             <div class="timeline-item fade-in">
                 <h3>Learning & Development</h3>
-                <div class="timeline-company">TCS (Tata Consultancy Services)</div>
+                <div class="timeline-company">Tata Consultancy Services</div>
                 <div class="timeline-date">December 2011 – April 2012</div>
                 <p class="timeline-description">Learned ASP.NET, C#, SQL DBMS, and MVC Architecture. Created non-life insurance website as part of team project. Foundation building phase in enterprise software development.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="section-header">
-            <div class="section-tag">Technical Stack</div>
-            <h2 class="section-title">Skills & <span class="accent">Technologies</span></h2>
-        </div>
-
-        <div class="skills-grid">
-            <div class="skill-card fade-in">
-                <h4>Integration Platforms</h4>
-                <div class="skill-list">
-                    <span class="skill-tag">BizTalk Server</span>
-                    <span class="skill-tag">MuleSoft AnyPoint</span>
-                    <span class="skill-tag">CloudHub 1.0 & 2.0</span>
-                    <span class="skill-tag">Azure Logic App</span>
-                    <span class="skill-tag">WebMethods</span>
-                </div>
-            </div>
-
-            <div class="skill-card fade-in">
-                <h4>Programming Languages</h4>
-                <div class="skill-list">
-                    <span class="skill-tag">C# / ASP.NET</span>
-                    <span class="skill-tag">Oracle PL/SQL</span>
-                    <span class="skill-tag">SQL Server / T-SQL</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">DataWeave</span>
-                </div>
-            </div>
-
-            <div class="skill-card fade-in">
-                <h4>Cloud & Databases</h4>
-                <div class="skill-list">
-                    <span class="skill-tag">Azure (Primary)</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Oracle Database</span>
-                    <span class="skill-tag">SQL Server</span>
-                </div>
-            </div>
-
-            <div class="skill-card fade-in">
-                <h4>Security & Monitoring</h4>
-                <div class="skill-list">
-                    <span class="skill-tag">OAuth 2.0</span>
-                    <span class="skill-tag">Okta</span>
-                    <span class="skill-tag">Azure Entra ID</span>
-                    <span class="skill-tag">AnyPoint Monitoring</span>
-                    <span class="skill-tag">Dynatrace</span>
-                    <span class="skill-tag">Splunk</span>
-                </div>
-            </div>
-
-            <div class="skill-card fade-in">
-                <h4>Latest Skills</h4>
-                <div class="skill-list">
-                    <span class="skill-tag">Agentic AI</span>
-                    <span class="skill-tag">MCP Protocol</span>
-                    <span class="skill-tag">Claude API</span>
-                    <span class="skill-tag">Prompt Engineering</span>
-                    <span class="skill-tag">Intelligent Automation</span>
-                </div>
-            </div>
-
-            <div class="skill-card fade-in">
-                <h4>Enterprise Clients</h4>
-                <div class="skill-list">
-                    <span class="skill-tag">PNC Bank</span>
-                    <span class="skill-tag">TransAlta, Canada</span>
-                    <span class="skill-tag">Esri</span>
-                    <span class="skill-tag">Mission-Critical Systems</span>
-                </div>
             </div>
         </div>
     </section>
@@ -655,8 +766,8 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="section-header">
-            <div class="section-tag">Get In Touch</div>
-            <h2 class="section-title">Let's <span class="accent">connect</span></h2>
+            <div class="section-tag">Let's Connect</div>
+            <h2 class="section-title">Get <span class="accent">In Touch</span></h2>
             <p class="section-subtitle">Interested in discussing enterprise integration, platform modernization, or exploring Agentic AI applications? I'd love to hear from you.</p>
         </div>
 
@@ -675,7 +786,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Shuvendu Chatterjee. Senior Enterprise Integration Developer.</p>
+        <p>&copy; 2025 Shuvendu Chatterjee. Senior Enterprise Integration Developer | Agentic AI Explorer.</p>
     </footer>
 
     <script>
