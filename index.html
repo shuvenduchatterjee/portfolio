@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shuvendu Chatterjee - Integration Developer & AI Engineer</title>
+    <title>Shuvendu Chatterjee - Senior Enterprise Integration Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -143,18 +143,6 @@
             letter-spacing: 1px;
             margin-bottom: 2rem;
             border: 1px solid rgba(14, 165, 233, 0.2);
-            animation: slideDown 0.6s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero h1 {
@@ -163,7 +151,6 @@
             line-height: 1.1;
             letter-spacing: -1.5px;
             margin-bottom: 1.5rem;
-            animation: slideDown 0.8s ease 0.1s both;
         }
 
         .hero h1 .highlight {
@@ -178,15 +165,13 @@
             color: var(--text-secondary);
             max-width: 700px;
             margin: 0 auto 2.5rem;
-            animation: slideDown 0.8s ease 0.2s both;
         }
 
         .hero-metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
-            animation: slideDown 0.8s ease 0.3s both;
         }
 
         .metric {
@@ -222,7 +207,6 @@
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: slideDown 0.8s ease 0.4s both;
         }
 
         .btn {
@@ -302,201 +286,6 @@
             line-height: 1.8;
         }
 
-        /* PROJECT GRID */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.6), rgba(37, 45, 74, 0.4));
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            border-radius: 1rem;
-            padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .project-card:hover {
-            border-color: rgba(14, 165, 233, 0.3);
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(37, 45, 74, 0.6));
-            transform: translateY(-8px);
-        }
-
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .project-tag {
-            display: inline-block;
-            background: rgba(14, 165, 233, 0.1);
-            color: var(--accent);
-            padding: 0.35rem 0.85rem;
-            border-radius: 0.35rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(14, 165, 233, 0.2);
-        }
-
-        .project-tag.ai {
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--accent-alt);
-            border-color: rgba(124, 58, 237, 0.2);
-        }
-
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(14, 165, 233, 0.08);
-            color: var(--accent);
-            padding: 0.4rem 0.8rem;
-            border-radius: 0.3rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid rgba(14, 165, 233, 0.15);
-        }
-
-        .tech-tag.ai {
-            background: rgba(124, 58, 237, 0.08);
-            color: var(--accent-alt);
-            border-color: rgba(124, 58, 237, 0.15);
-        }
-
-        /* EXPERTISE */
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .expertise-card {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            border-radius: 0.75rem;
-            padding: 2.25rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .expertise-card:hover {
-            background: rgba(26, 31, 58, 0.7);
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-
-        .expertise-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(14, 165, 233, 0.1);
-            border: 2px solid rgba(14, 165, 233, 0.3);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .expertise-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
-            color: var(--accent);
-        }
-
-        .expertise-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* SKILLS */
-        .skills-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .skill-category {
-            background: rgba(26, 31, 58, 0.3);
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            border-radius: 0.75rem;
-            padding: 2rem;
-        }
-
-        .skill-category-title {
-            color: var(--accent);
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .skill-category-title::before {
-            content: '';
-            width: 3px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .skill {
-            background: rgba(14, 165, 233, 0.08);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 0.35rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(14, 165, 233, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .skill:hover {
-            background: rgba(14, 165, 233, 0.15);
-            border-color: var(--accent);
-        }
-
         /* TIMELINE */
         .timeline {
             position: relative;
@@ -558,6 +347,54 @@
             line-height: 1.8;
         }
 
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(26, 31, 58, 0.4);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            border-radius: 0.75rem;
+            padding: 2rem;
+        }
+
+        .skill-card h4 {
+            color: var(--accent);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-card h4::before {
+            content: '';
+            width: 3px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(14, 165, 233, 0.08);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(14, 165, 233, 0.15);
+        }
+
         /* CONTACT */
         .contact-section {
             text-align: center;
@@ -614,20 +451,12 @@
                 font-size: 2.5rem;
             }
 
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            section {
+            .section {
                 padding: 4rem 1rem;
             }
 
             .section-title {
                 font-size: 2rem;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
             }
 
             .timeline {
@@ -644,13 +473,8 @@
             }
         }
 
-        /* ANIMATIONS */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .fade-in.visible {
             animation: fadeInUp 0.6s ease forwards;
         }
 
@@ -668,9 +492,8 @@
         <div class="nav-container">
             <div class="logo">SC</div>
             <ul class="nav-links">
-                <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -679,245 +502,32 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-tag">INTEGRATION DEVELOPER + AI ENGINEER</div>
-            <h1>Enterprise Integration with <span class="highlight">AI Edge</span></h1>
-            <p class="hero-subtitle">14+ years architecting enterprise integrations at scale. Latest focus: Agentic AI integration patterns, MCP, and intelligent automation for enterprise systems.</p>
+            <div class="hero-tag">SENIOR ENTERPRISE INTEGRATION DEVELOPER</div>
+            <h1>Building <span class="highlight">enterprise integration solutions</span></h1>
+            <p class="hero-subtitle">13+ years architecting mission-critical integrations. Expert in BizTalk, MuleSoft, Oracle. Recently promoted to Senior level. Latest: Exploring Agentic AI for intelligent enterprise integration.</p>
             
             <div class="hero-metrics">
                 <div class="metric">
+                    <div class="metric-value">13+</div>
+                    <div class="metric-label">Years Experience</div>
+                </div>
+                <div class="metric">
                     <div class="metric-value">120+</div>
-                    <div class="metric-label">Production Systems</div>
+                    <div class="metric-label">Integrations Built</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">95%+</div>
                     <div class="metric-label">SLA Achieved</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">3</div>
-                    <div class="metric-label">Major Migrations Led</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">Latest</div>
-                    <div class="metric-label">Agentic AI</div>
+                    <div class="metric-value">5+</div>
+                    <div class="metric-label">Major Migrations</div>
                 </div>
             </div>
 
             <div class="cta-group">
-                <a href="#projects" class="btn btn-primary">See My Work</a>
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
                 <a href="https://www.linkedin.com/in/shuvendu-chatterjee/" class="btn btn-secondary">LinkedIn</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="section-header">
-            <div class="section-tag">What I Build</div>
-            <h2 class="section-title">Enterprise Integration <span class="accent">Projects</span></h2>
-            <p class="section-subtitle">Complex integrations, critical migrations, and latest explorations in intelligent automation.</p>
-        </div>
-
-        <div class="project-grid">
-            <!-- INTEGRATION PROJECTS -->
-            <div class="project-card fade-in">
-                <div class="project-tag">ENTERPRISE SCALE</div>
-                <h3>120+ Integration Platform</h3>
-                <p>Architected and maintained platform supporting 120+ production integrations across enterprise systems. Achieved 95%+ SLA through robust architecture design, comprehensive monitoring, and proactive issue resolution.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">MuleSoft</span>
-                    <span class="tech-tag">API-Led Architecture</span>
-                    <span class="tech-tag">CloudHub</span>
-                    <span class="tech-tag">Real-Time Sync</span>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-tag">MIGRATION</div>
-                <h3>Java 8 → Java 17 Modernization</h3>
-                <p>Led platform-wide Java version upgrade for 120+ integration applications. Updated all applications for Java 17 compatibility with zero downtime. Achieved 20% performance improvement through modernization.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Java 8 to 17</span>
-                    <span class="tech-tag">Performance</span>
-                    <span class="tech-tag">Security</span>
-                    <span class="tech-tag">Zero-Downtime</span>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-tag">SECURITY</div>
-                <h3>Okta → Entra ID Migration</h3>
-                <p>Architected migration from Okta to Azure Entra ID as OAuth provider for MuleSoft. Redesigned authentication for 20+ client applications with parallel-running setup and seamless transition. 99.9% uptime maintained.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Okta</span>
-                    <span class="tech-tag">Entra ID</span>
-                    <span class="tech-tag">OAuth 2.0</span>
-                    <span class="tech-tag">MuleSoft</span>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-tag">MODERNIZATION</div>
-                <h3>CloudHub 1.0 → 2.0 Migration</h3>
-                <p>Led technical migration of 50+ critical integrations to next-generation CloudHub 2.0 architecture. Modernized deployment: traditional → container-based (Docker/Kubernetes). Achieved 40% faster deployments, auto-scaling.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">CloudHub 2.0</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">Kubernetes</span>
-                    <span class="tech-tag">Auto-Scaling</span>
-                </div>
-            </div>
-
-            <!-- AI PROJECT -->
-            <div class="project-card fade-in">
-                <div class="project-tag ai">LATEST: AGENTIC AI</div>
-                <h3>Intelligent Integration Patterns</h3>
-                <p>Exploring agentic AI applications to enterprise integration. Investigating multi-agent orchestration for workflow automation. Designing MCP patterns for intelligent agent-based integration governance.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag ai">Agentic AI</span>
-                    <span class="tech-tag ai">MCP</span>
-                    <span class="tech-tag ai">Agent Design</span>
-                    <span class="tech-tag ai">Intelligent Automation</span>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-tag">SCALE & RELIABILITY</div>
-                <h3>90+ App Migration (BizTalk → MuleSoft)</h3>
-                <p>Led enterprise-wide platform modernization for SAP S/4-HANA transition. Successfully migrated 90+ applications from BizTalk/CastIron to MuleSoft with comprehensive testing, zero data loss, improved performance.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">BizTalk</span>
-                    <span class="tech-tag">MuleSoft</span>
-                    <span class="tech-tag">SAP S/4-HANA</span>
-                    <span class="tech-tag">Migration</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expertise Section -->
-    <section id="expertise">
-        <div class="section-header">
-            <div class="section-tag">Core Expertise</div>
-            <h2 class="section-title">What I <span class="accent">Know</span></h2>
-        </div>
-
-        <div class="expertise-grid">
-            <div class="expertise-card fade-in">
-                <div class="expertise-icon">🏗️</div>
-                <h3>Enterprise Integration</h3>
-                <p>API-led architecture, hub-and-spoke patterns, event-driven systems. 120+ production integrations designed and maintained at scale.</p>
-            </div>
-
-            <div class="expertise-card fade-in">
-                <div class="expertise-icon">☁️</div>
-                <h3>CloudHub & MuleSoft</h3>
-                <p>AnyPoint Platform expertise, CloudHub v1.0 & v2.0, API management, DataWeave transformations, MUnit testing, comprehensive monitoring.</p>
-            </div>
-
-            <div class="expertise-card fade-in">
-                <div class="expertise-icon">🔧</div>
-                <h3>Platform Modernization</h3>
-                <p>Java 8→17 migrations, legacy system upgrades, CloudHub modernization, Okta→Entra transitions, zero-downtime deployments.</p>
-            </div>
-
-            <div class="expertise-card fade-in">
-                <div class="expertise-icon">🔐</div>
-                <h3>Security & OAuth</h3>
-                <p>OAuth 2.0 implementation, Okta & Entra ID integration, API security standards, client authentication patterns, data protection.</p>
-            </div>
-
-            <div class="expertise-card fade-in">
-                <div class="expertise-icon">📊</div>
-                <h3>Monitoring & Reliability</h3>
-                <p>AnyPoint Monitoring, Dynatrace, Splunk. 95%+ SLA achievement through proactive monitoring, trend analysis, and performance optimization.</p>
-            </div>
-
-            <div class="expertise-card fade-in">
-                <div class="expertise-icon">🤖</div>
-                <h3>Latest: Agentic AI</h3>
-                <p>Multi-agent systems, MCP, agent architecture, prompt engineering, intelligent automation, autonomous integration patterns.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section>
-        <div class="section-header">
-            <div class="section-tag">Technical Stack</div>
-            <h2 class="section-title">Languages & <span class="accent">Technologies</span></h2>
-        </div>
-
-        <div class="skills-section">
-            <div class="skill-category fade-in">
-                <h4 class="skill-category-title">MuleSoft & Integration</h4>
-                <div class="skill-list">
-                    <span class="skill">MuleSoft AnyPoint</span>
-                    <span class="skill">CloudHub 1.0 & 2.0</span>
-                    <span class="skill">DataWeave</span>
-                    <span class="skill">MUnit Testing</span>
-                    <span class="skill">API-Led Architecture</span>
-                    <span class="skill">RAML/WSDL</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h4 class="skill-category-title">Java & Programming</h4>
-                <div class="skill-list">
-                    <span class="skill">Java 8-17</span>
-                    <span class="skill">Python</span>
-                    <span class="skill">SQL</span>
-                    <span class="skill">C#</span>
-                    <span class="skill">TypeScript/JavaScript</span>
-                    <span class="skill">Bash</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h4 class="skill-category-title">Cloud & Infrastructure</h4>
-                <div class="skill-list">
-                    <span class="skill">Azure (Primary)</span>
-                    <span class="skill">AWS</span>
-                    <span class="skill">Docker</span>
-                    <span class="skill">Kubernetes</span>
-                    <span class="skill">CI/CD Pipelines</span>
-                    <span class="skill">Microservices</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h4 class="skill-category-title">Security & Authentication</h4>
-                <div class="skill-list">
-                    <span class="skill">OAuth 2.0</span>
-                    <span class="skill">Okta</span>
-                    <span class="skill">Azure Entra ID</span>
-                    <span class="skill">API Security</span>
-                    <span class="skill">Encryption</span>
-                    <span class="skill">Identity Management</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h4 class="skill-category-title">Monitoring & DevOps</h4>
-                <div class="skill-list">
-                    <span class="skill">AnyPoint Monitoring</span>
-                    <span class="skill">Dynatrace</span>
-                    <span class="skill">Splunk</span>
-                    <span class="skill">Jenkins</span>
-                    <span class="skill">GitHub Actions</span>
-                    <span class="skill">APM</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h4 class="skill-category-title">Latest: Agentic AI</h4>
-                <div class="skill-list">
-                    <span class="skill">Multi-Agent Systems</span>
-                    <span class="skill">MCP Protocol</span>
-                    <span class="skill">Claude API</span>
-                    <span class="skill">Prompt Engineering</span>
-                    <span class="skill">Agent Architecture</span>
-                    <span class="skill">Intelligent Automation</span>
-                </div>
             </div>
         </div>
     </section>
@@ -925,30 +535,119 @@
     <!-- Experience Section -->
     <section id="experience">
         <div class="section-header">
-            <div class="section-tag">Journey</div>
-            <h2 class="section-title">Professional <span class="accent">Experience</span></h2>
+            <div class="section-tag">Professional Journey</div>
+            <h2 class="section-title">Career <span class="accent">Timeline</span></h2>
         </div>
 
         <div class="timeline">
             <div class="timeline-item fade-in">
-                <h3>Senior Integration Developer</h3>
-                <div class="timeline-company">Enterprise Integration Focus + Agentic AI Exploration</div>
-                <div class="timeline-date">Feb 2023 – Present</div>
-                <p class="timeline-description">Leading enterprise integration initiatives while exploring Agentic AI patterns. Architected 120+ production integrations, achieved 95%+ SLA. Led 3 major migrations: Java 8→17, Okta→Entra, CloudHub 1.0→2.0. Currently exploring intelligent agent applications to integration automation and MCP patterns.</p>
+                <h3>Senior Enterprise Integration Developer</h3>
+                <div class="timeline-company">Esri</div>
+                <div class="timeline-date">2023 – Present</div>
+                <p class="timeline-description">Promoted to Senior level in 2023. Architecting 120+ production integrations with 95%+ SLA. Led 3 major migrations: Java 8→17 (platform modernization), Okta→Entra ID (OAuth provider), CloudHub 1.0→2.0 (platform upgrade). Exploring Agentic AI patterns for intelligent enterprise automation.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <h3>Enterprise Integration Developer</h3>
+                <div class="timeline-company">Esri</div>
+                <div class="timeline-date">June 2019 – 2023</div>
+                <p class="timeline-description">Built and maintained 120+ production integrations with 95%+ SLA. Led 90+ application migration from legacy platforms to MuleSoft. Implemented OAuth 2.0 security standards and API management. Established comprehensive monitoring using AnyPoint, Dynatrace, Splunk.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <h3>Senior Developer</h3>
+                <div class="timeline-company">TCS (Tata Consultancy Services)</div>
+                <div class="timeline-date">July 2014 – May 2019</div>
+                <p class="timeline-description">Developed mission-critical integration solutions using BizTalk and Oracle PL/SQL. Delivered integration solutions for TransAlta, Canada. Architected scalable enterprise platforms using Azure Logic App and hybrid applications. 5 years of enterprise integration expertise.</p>
             </div>
 
             <div class="timeline-item fade-in">
                 <h3>Integration Developer</h3>
-                <div class="timeline-company">Previous Roles</div>
-                <div class="timeline-date">June 2019 – Feb 2023</div>
-                <p class="timeline-description">Maintained platform supporting 120+ production integrations with 95% SLA. Implemented OAuth 2.0 and Okta authentication for 20+ applications. Led SAP S/4-HANA migration of 90+ applications. Established comprehensive monitoring using AnyPoint, Dynatrace, Splunk.</p>
+                <div class="timeline-company">TCS (Tata Consultancy Services)</div>
+                <div class="timeline-date">April 2012 – July 2014</div>
+                <p class="timeline-description">Led WebMethods to BizTalk migration for PNC Bank banking integration solution. Implemented critical banking integrations. Learned and mastered BizTalk Server. Delivered mission-critical platform supporting PNC Bank operations.</p>
             </div>
 
             <div class="timeline-item fade-in">
-                <h3>Senior Integration Consultant & Technical Lead</h3>
-                <div class="timeline-company">Earlier Career</div>
-                <div class="timeline-date">2014 – 2019</div>
-                <p class="timeline-description">Led teams of 10+ engineers on enterprise integration projects. Architected 150+ real-time integrations for energy, utilities, financial sectors. Pioneered cloud migration strategies (300+ applications to Azure). Established SOA governance and integration standards.</p>
+                <h3>Learning & Development</h3>
+                <div class="timeline-company">TCS (Tata Consultancy Services)</div>
+                <div class="timeline-date">December 2011 – April 2012</div>
+                <p class="timeline-description">Learned ASP.NET, C#, SQL DBMS, and MVC Architecture. Created non-life insurance website as part of team project. Foundation building phase in enterprise software development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-tag">Technical Stack</div>
+            <h2 class="section-title">Skills & <span class="accent">Technologies</span></h2>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <h4>Integration Platforms</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">BizTalk Server</span>
+                    <span class="skill-tag">MuleSoft AnyPoint</span>
+                    <span class="skill-tag">CloudHub 1.0 & 2.0</span>
+                    <span class="skill-tag">Azure Logic App</span>
+                    <span class="skill-tag">WebMethods</span>
+                </div>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h4>Programming Languages</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">C# / ASP.NET</span>
+                    <span class="skill-tag">Oracle PL/SQL</span>
+                    <span class="skill-tag">SQL Server / T-SQL</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">DataWeave</span>
+                </div>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h4>Cloud & Databases</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">Azure (Primary)</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Oracle Database</span>
+                    <span class="skill-tag">SQL Server</span>
+                </div>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h4>Security & Monitoring</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">OAuth 2.0</span>
+                    <span class="skill-tag">Okta</span>
+                    <span class="skill-tag">Azure Entra ID</span>
+                    <span class="skill-tag">AnyPoint Monitoring</span>
+                    <span class="skill-tag">Dynatrace</span>
+                    <span class="skill-tag">Splunk</span>
+                </div>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h4>Latest Skills</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">Agentic AI</span>
+                    <span class="skill-tag">MCP Protocol</span>
+                    <span class="skill-tag">Claude API</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                    <span class="skill-tag">Intelligent Automation</span>
+                </div>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h4>Enterprise Clients</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">PNC Bank</span>
+                    <span class="skill-tag">TransAlta, Canada</span>
+                    <span class="skill-tag">Esri</span>
+                    <span class="skill-tag">Mission-Critical Systems</span>
+                </div>
             </div>
         </div>
     </section>
@@ -956,9 +655,9 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="section-header">
-            <div class="section-tag">Let's Connect</div>
-            <h2 class="section-title">Build <span class="accent">enterprise systems</span> together</h2>
-            <p class="section-subtitle">Enterprise integration, platform modernization, or exploring Agentic AI applications? Let's talk.</p>
+            <div class="section-tag">Get In Touch</div>
+            <h2 class="section-title">Let's <span class="accent">connect</span></h2>
+            <p class="section-subtitle">Interested in discussing enterprise integration, platform modernization, or exploring Agentic AI applications? I'd love to hear from you.</p>
         </div>
 
         <div class="contact-links">
@@ -976,7 +675,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Shuvendu Chatterjee. Integration Developer & AI Engineer.</p>
+        <p>&copy; 2025 Shuvendu Chatterjee. Senior Enterprise Integration Developer.</p>
     </footer>
 
     <script>
@@ -991,17 +690,24 @@
             });
         });
 
-        // Scroll animations
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { threshold: 0.1 });
+        }, observerOptions);
 
         document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
     </script>
