@@ -469,16 +469,16 @@
             <div class="mcp-card-name">order<br>-mcp</div>
             <span class="mcp-badge">MCP</span>
           </div>
-          <div class="mcp-card" style="border-style:dashed;opacity:0.65;">
+          <div class="mcp-card" style="border-style:dashed;border-color:#a78bfa;opacity:0.85;background:#faf8ff;">
             <div class="mcp-card-icon">
               <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="19" fill="#EBF4FF" stroke="#b3d7f5" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="7" stroke="#0077BE" stroke-width="2" fill="none"/>
-                <path d="M15 20h10M20 15v10" stroke="#0077BE" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="19" fill="#F0EEFF" stroke="#c4b5fd" stroke-width="1.5"/>
+                <circle cx="20" cy="14" r="5" stroke="#7C3AED" stroke-width="2" fill="none"/>
+                <path d="M14 28c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#7C3AED" stroke-width="2" fill="none" stroke-linecap="round"/>
               </svg>
             </div>
-            <div class="mcp-card-name">onesearch<br>-mcp (fallback)</div>
-            <span class="mcp-badge">MCP</span>
+            <div class="mcp-card-name" style="color:#5B21B6;">OneSearch Agent<br>(MS365 Copilot)</div>
+            <span class="mcp-badge" style="color:#7C3AED;background:#F0EEFF;border-color:#c4b5fd;">Agent Fallback</span>
           </div>
         </div>
       </div>
@@ -552,7 +552,7 @@
               <text x="18" y="20" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Point</text>
             </svg>
             <div class="system-name">SharePoint</div>
-            <div class="system-obj">fallback via<br>onesearch</div>
+            <div class="system-obj">via OneSearch<br>Agent fallback</div>
           </div>
         </div>
       </div>
@@ -573,7 +573,7 @@
           <path d="M15.5 15.5L21 21"/>
         </svg>
       </div>
-      Esri General Agent Demo
+      OneSearch Agent Demo
       <span style="font-size:10px;font-weight:400;opacity:0.8;">· GIS Knowledge · Internal Docs · HR Policies</span>
     </div>
 
@@ -591,7 +591,7 @@
 
     <!-- Copilot -->
     <div class="layer">
-      <div class="layer-label">Esri General Agent<div class="layer-sub">Copilot Studio</div></div>
+      <div class="layer-label">OneSearch Agent<div class="layer-sub">Copilot Studio</div></div>
       <div class="layer-content">
         <div class="copilot-row">
           <div class="copilot-logo">
@@ -662,35 +662,22 @@
                 <circle cx="27" cy="25" r="3" fill="#007A6E"/>
               </svg>
             </div>
-            <div class="mcp-card-name">esri-public<br>-mcp</div>
+            <div class="mcp-card-name">esri-public<br>-search-mcp</div>
             <span class="mcp-badge teal">MCP</span>
           </div>
-          <div class="mcp-card">
+          <div class="mcp-card" style="border-color:#b3dbd7;background:#f0faf9;">
             <div class="mcp-card-icon">
               <svg viewBox="0 0 40 40" fill="none">
                 <circle cx="20" cy="20" r="19" fill="#E6F4F2" stroke="#b3dbd7" stroke-width="1.5"/>
-                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
-                <circle cx="13" cy="25" r="3" fill="#007A6E"/>
-                <circle cx="27" cy="25" r="3" fill="#007A6E"/>
+                <rect x="11" y="13" width="18" height="14" rx="2" stroke="#007A6E" stroke-width="2" fill="none"/>
+                <path d="M11 18h18" stroke="#007A6E" stroke-width="1.5"/>
+                <path d="M16 22h8" stroke="#007A6E" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
-            <div class="mcp-card-name">sharepoint<br>-knowledge-mcp</div>
-            <span class="mcp-badge teal">MCP</span>
+            <div class="mcp-card-name">SharePoint<br>(MS365 Native Knowledge)</div>
+            <span class="mcp-badge teal" style="font-size:7px;">Native · No MuleSoft</span>
           </div>
-          <div class="mcp-card">
-            <div class="mcp-card-icon">
-              <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="19" fill="#E6F4F2" stroke="#b3dbd7" stroke-width="1.5"/>
-                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
-                <circle cx="13" cy="25" r="3" fill="#007A6E"/>
-                <circle cx="27" cy="25" r="3" fill="#007A6E"/>
-              </svg>
-            </div>
-            <div class="mcp-card-name">elasticsearch<br>-search-mcp</div>
-            <span class="mcp-badge teal">MCP</span>
-          </div>
+
         </div>
       </div>
     </div>
@@ -712,13 +699,16 @@
             <div class="api-card-logo">
               <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#007A6E"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
             </div>
-            <div class="api-card-name">esri-search<br>system-api</div>
+            <div class="api-card-name">esri-public<br>search-api</div>
           </div>
-          <div class="api-card">
+          <div class="api-card" style="border-style:dashed;opacity:0.5;background:#f8fffe;">
             <div class="api-card-logo">
-              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#007A6E"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+              <svg viewBox="0 0 28 28" fill="none">
+                <circle cx="14" cy="14" r="13" fill="#e0f2f1" stroke="#b3dbd7" stroke-width="1"/>
+                <text x="14" y="18" text-anchor="middle" font-size="9" font-weight="700" fill="#038387" font-family="Arial">SP</text>
+              </svg>
             </div>
-            <div class="api-card-name">sharepoint<br>sys-api</div>
+            <div class="api-card-name" style="color:#9AB0C4;">SharePoint<br>(MS365 Native)</div>
           </div>
         </div>
       </div>
@@ -734,26 +724,17 @@
               <rect width="36" height="26" rx="4" fill="#007AC2"/>
               <text x="18" y="17" text-anchor="middle" font-size="10" font-weight="800" fill="white" font-family="Arial">Esri</text>
             </svg>
-            <div class="system-name">Esri Public</div>
-            <div class="system-obj">docs · blog<br>community · learn</div>
+            <div class="system-name">Esri Public Search</div>
+            <div class="system-obj">docs · blog · community<br>learn · public sites</div>
           </div>
-          <div class="system-card">
+          <div class="system-card" style="border-color:#038387;border-style:dashed;">
             <svg class="system-logo" viewBox="0 0 36 26">
               <rect width="36" height="26" rx="4" fill="#038387"/>
               <text x="18" y="11" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Share</text>
               <text x="18" y="20" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Point</text>
             </svg>
             <div class="system-name">SharePoint</div>
-            <div class="system-obj">HR · policies<br>internal docs</div>
-          </div>
-          <div class="system-card">
-            <svg class="system-logo" viewBox="0 0 36 26">
-              <rect width="36" height="26" rx="4" fill="#F4BD19"/>
-              <text x="18" y="11" text-anchor="middle" font-size="6.5" font-weight="800" fill="#1a1a1a" font-family="Arial">Elastic</text>
-              <text x="18" y="20" text-anchor="middle" font-size="6.5" font-weight="800" fill="#1a1a1a" font-family="Arial">search</text>
-            </svg>
-            <div class="system-name">Elasticsearch</div>
-            <div class="system-obj">public sites · web</div>
+            <div class="system-obj">MS365 Native<br>Knowledge Source</div>
           </div>
         </div>
       </div>
