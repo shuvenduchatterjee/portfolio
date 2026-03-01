@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuleSoft Agent Fabric — Agent Architecture</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #F0F4F8;
+    font-family: 'Inter', sans-serif;
+    padding: 32px 24px 48px;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0D1B2A;
+    letter-spacing: -0.02em;
+  }
+  .page-title span { color: #0077BE; }
+  .page-sub {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #7A8FA6;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* STACKED LAYOUT */
+  .agents-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .agent-panel {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05);
+  }
+
+  .agent-header {
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .agent-header.blue { background: linear-gradient(135deg, #0077BE, #005fa3); }
+  .agent-header.teal { background: linear-gradient(135deg, #007A6E, #005a52); }
+
+  .agent-header-icon {
+    width: 28px; height: 28px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* CAPABILITY PILLS */
+  .cap-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 16px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E8EDF2;
+  }
+  .cap-pill {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #E8F0FE;
+    color: #1a56b0;
+    border: 1px solid #c3d7fa;
+  }
+  .cap-pill.teal {
+    background: #E6F4F2;
+    color: #006b61;
+    border-color: #b3dbd7;
+  }
+
+  /* LAYER ROW */
+  .layer {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    border-bottom: 1px solid #EDF1F5;
+  }
+  .layer:last-child { border-bottom: none; }
+
+  .layer-label {
+    padding: 14px 12px;
+    background: #F8FAFC;
+    border-right: 1px solid #EDF1F5;
+    font-size: 10px;
+    font-weight: 600;
+    color: #5A7184;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .layer-label .layer-sub {
+    font-weight: 400;
+    color: #9AB0C4;
+    font-size: 9px;
+    margin-top: 2px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .layer-content {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  /* COPILOT ROW */
+  .copilot-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .copilot-logo {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 700; color: #0D1B2A;
+    flex-shrink: 0;
+  }
+  .meta-tags {
+    display: flex; flex-wrap: wrap; gap: 4px;
+  }
+  .meta-tag {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #7A8FA6;
+    background: #F0F4F8;
+    border: 1px solid #DDE4EC;
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  /* POLICY TAGS */
+  .policy-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .policy-tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 5px;
+    border: 1.5px solid;
+    display: flex; align-items: center; gap: 5px;
+    white-space: nowrap;
+  }
+  .policy-tag.red    { color: #C0392B; border-color: #e8b4b0; background: #fdf2f2; }
+  .policy-tag.orange { color: #C06000; border-color: #f0d0a0; background: #fdf6ee; }
+  .policy-tag.purple { color: #6B3FA0; border-color: #d0b8f0; background: #f6f0fd; }
+  .policy-tag.blue   { color: #1a56b0; border-color: #c3d7fa; background: #E8F0FE; }
+  .policy-tag.green  { color: #1a6b40; border-color: #a8d8b8; background: #edf7f2; }
+  .policy-tag.amber  { color: #92570A; border-color: #e8c97a; background: #fef9ed; }
+
+  /* MCP CARDS */
+  .mcp-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .mcp-card {
+    flex: 1;
+    min-width: 110px;
+    max-width: 220px;
+    border: 1.5px solid #DDE4EC;
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    background: #FAFCFE;
+  }
+  .mcp-card-icon {
+    margin: 0 auto 7px;
+    width: 40px; height: 40px;
+  }
+  .mcp-card-name {
+    font-size: 10px;
+    font-weight: 600;
+    color: #3A5470;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.4;
+  }
+  .mcp-badge {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #0077BE;
+    background: #E0F0FF;
+    border: 1px solid #b3d7f5;
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .mcp-badge.teal {
+    color: #007A6E;
+    background: #E6F4F2;
+    border-color: #b3dbd7;
+  }
+
+  /* SINGLE POLICY BAR */
+  .policy-bar {
+    background: #F0F4F8;
+    border: 1.5px dashed #C5D2DE;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #4A6070;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    letter-spacing: 0.05em;
+    align-self: stretch;
+  }
+
+  /* API CARDS */
+  .api-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .api-card {
+    flex: 1;
+    min-width: 100px;
+    border: 1.5px solid #DDE4EC;
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    background: #fff;
+  }
+  .api-card-logo {
+    width: 28px; height: 28px;
+    margin: 0 auto 5px;
+  }
+  .api-card-name {
+    font-size: 9px;
+    font-weight: 600;
+    color: #3A5470;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.4;
+  }
+
+  /* SYSTEM CARDS */
+  .system-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .system-card {
+    flex: 1;
+    min-width: 110px;
+    border: 2px solid #DDE4EC;
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    background: #FAFCFE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .system-card.fallback {
+    border-style: dashed;
+    opacity: 0.7;
+  }
+  .system-logo { width: 36px; height: 26px; }
+  .system-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1A2E42;
+  }
+  .system-obj {
+    font-size: 9px;
+    color: #7A8FA6;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.4;
+  }
+
+  /* FOOTER */
+  .page-footer {
+    max-width: 900px;
+    margin: 20px auto 0;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: #0D1B2A;
+    border-radius: 10px;
+  }
+  .footer-pattern {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #5bbfef;
+    letter-spacing: 0.1em;
+    flex: 1;
+    text-align: center;
+  }
+  .footer-dot { color: #0077BE; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">MuleSoft Agent Fabric — <span>Agent Architecture</span></div>
+  <div class="page-sub">MS365 Copilot Studio · Flex Gateway · CloudHub 2.0 · MCP</div>
+</div>
+
+<div class="agents-stack">
+
+  <!-- ═══════════════════════════════════════════
+       AGENT 1 — SERVICE AGENT DEMO
+  ═══════════════════════════════════════════ -->
+  <div class="agent-panel">
+
+    <div class="agent-header blue">
+      <div class="agent-header-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11a9 9 0 1 1 18 0"/>
+          <rect x="2" y="11" width="4" height="7" rx="2"/>
+          <rect x="18" y="11" width="4" height="7" rx="2"/>
+        </svg>
+      </div>
+      Service Agent Demo
+      <span style="font-size:10px;font-weight:400;opacity:0.8;">· Customer Service · Acting on behalf of users</span>
+    </div>
+
+    <div class="cap-row">
+      <span class="cap-pill">Get Knowledge Article</span>
+      <span class="cap-pill">Create Case</span>
+      <span class="cap-pill">Get Case Status</span>
+      <span class="cap-pill">Get Case History</span>
+      <span class="cap-pill">Get Contact</span>
+      <span class="cap-pill">Create Contact</span>
+      <span class="cap-pill">Get Customer Info</span>
+      <span class="cap-pill">Get Order Info</span>
+      <span class="cap-pill">OneSearch Fallback</span>
+    </div>
+
+    <!-- Copilot -->
+    <div class="layer">
+      <div class="layer-label">Service Agent<div class="layer-sub">Copilot Studio</div></div>
+      <div class="layer-content">
+        <div class="copilot-row">
+          <div class="copilot-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="11" fill="#0F6CBD"/>
+              <path d="M7 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <circle cx="8.5" cy="14" r="2" fill="white"/>
+              <circle cx="15.5" cy="14" r="2" fill="white"/>
+            </svg>
+            Copilot Studio
+          </div>
+          <div class="meta-tags">
+            <span class="meta-tag">Instructions</span>
+            <span class="meta-tag">Prompts</span>
+            <span class="meta-tag">Topics</span>
+            <span class="meta-tag">Tools</span>
+            <span class="meta-tag">LLM — GPT 4.1 / 5.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flex Gateway Policies -->
+    <div class="layer">
+      <div class="layer-label">Flex Gateway<div class="layer-sub">Policies</div></div>
+      <div class="layer-content">
+        <div class="policy-grid">
+          <span class="policy-tag red">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3a1 1 0 110 2 1 1 0 010-2zm0 3.5c.55 0 1 .45 1 1V11a1 1 0 01-2 0V8.5c0-.55.45-1 1-1z"/></svg>
+            MCP PII Policy
+          </span>
+          <span class="policy-tag orange">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L1 4v4c0 4 3.1 7.7 7 8.9C11.9 15.7 15 12 15 8V4L8 0z"/></svg>
+            MCP Schema Validation
+          </span>
+          <span class="policy-tag blue">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a5 5 0 00-5 5v1H2v7h12V7h-1V6a5 5 0 00-5-5zm0 2a3 3 0 013 3v1H5V6a3 3 0 013-3z"/></svg>
+            Client Validation
+          </span>
+          <span class="policy-tag purple">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L2 3v4c0 3.5 2.5 6.8 6 7.9 3.5-1.1 6-4.4 6-7.9V3L8 0z"/></svg>
+            Token Validation
+          </span>
+          <span class="policy-tag green">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="4" width="14" height="2" rx="1"/><rect x="1" y="7" width="10" height="2" rx="1"/><rect x="1" y="10" width="12" height="2" rx="1"/></svg>
+            Rate Limiting
+          </span>
+          <span class="policy-tag amber">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.5 4h4.5l-3.5 2.5 1.5 4L8 9l-4 2.5 1.5-4L2 5h4.5z"/></svg>
+            Spike Control
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MCP Servers -->
+    <div class="layer">
+      <div class="layer-label">MuleSoft Flex GW<div class="layer-sub">CloudHub 2.0 · MCP</div></div>
+      <div class="layer-content">
+        <div class="mcp-row">
+          <div class="mcp-card">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#EBF4FF" stroke="#b3d7f5" stroke-width="1.5"/>
+                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#0077BE" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#0077BE" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="13" cy="25" r="3" fill="#0077BE"/>
+                <circle cx="27" cy="25" r="3" fill="#0077BE"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">sf-service-cloud<br>-mcp</div>
+            <span class="mcp-badge">MCP</span>
+          </div>
+          <div class="mcp-card">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#EBF4FF" stroke="#b3d7f5" stroke-width="1.5"/>
+                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#0077BE" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#0077BE" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="13" cy="25" r="3" fill="#0077BE"/>
+                <circle cx="27" cy="25" r="3" fill="#0077BE"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">customer-info<br>-mcp</div>
+            <span class="mcp-badge">MCP</span>
+          </div>
+          <div class="mcp-card">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#EBF4FF" stroke="#b3d7f5" stroke-width="1.5"/>
+                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#0077BE" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#0077BE" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="13" cy="25" r="3" fill="#0077BE"/>
+                <circle cx="27" cy="25" r="3" fill="#0077BE"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">order<br>-mcp</div>
+            <span class="mcp-badge">MCP</span>
+          </div>
+          <div class="mcp-card" style="border-style:dashed;opacity:0.65;">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#EBF4FF" stroke="#b3d7f5" stroke-width="1.5"/>
+                <circle cx="20" cy="20" r="7" stroke="#0077BE" stroke-width="2" fill="none"/>
+                <path d="M15 20h10M20 15v10" stroke="#0077BE" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">onesearch<br>-mcp (fallback)</div>
+            <span class="mcp-badge">MCP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Policy -->
+    <div class="layer">
+      <div class="layer-label">MuleSoft API<div class="layer-sub">Policy</div></div>
+      <div class="layer-content">
+        <div class="policy-bar">⚙&nbsp; client validation policy</div>
+      </div>
+    </div>
+
+    <!-- System APIs -->
+    <div class="layer">
+      <div class="layer-label">Mule Gateway<div class="layer-sub">CloudHub Runtime</div></div>
+      <div class="layer-content">
+        <div class="api-row">
+          <div class="api-card">
+            <div class="api-card-logo">
+              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#0077BE"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+            </div>
+            <div class="api-card-name">sf-knowledge<br>system-api</div>
+          </div>
+          <div class="api-card">
+            <div class="api-card-logo">
+              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#0077BE"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+            </div>
+            <div class="api-card-name">sf-contact<br>sys-api</div>
+          </div>
+          <div class="api-card">
+            <div class="api-card-logo">
+              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#0077BE"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+            </div>
+            <div class="api-card-name">sf-case<br>sys-api</div>
+          </div>
+          <div class="api-card">
+            <div class="api-card-logo">
+              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#0077BE"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+            </div>
+            <div class="api-card-name">sap-customer<br>order-api</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Systems -->
+    <div class="layer">
+      <div class="layer-label">Systems<div class="layer-sub">of Record</div></div>
+      <div class="layer-content">
+        <div class="system-row">
+          <div class="system-card">
+            <svg class="system-logo" viewBox="0 0 36 26">
+              <path d="M15 3c1-1.1 2.5-1.8 4-1.8 2 0 3.8 1.1 4.7 2.7.7-.3 1.5-.5 2.4-.5 3 0 5.5 2.5 5.5 5.5 0 .3 0 .5-.1.8 1.4.8 2.5 2.3 2.5 4.1 0 2.5-2 4.5-4.5 4.5H6c-2.5 0-4.5-2-4.5-4.5 0-2.2 1.6-4 3.7-4.4-.1-.3-.1-.7-.1-1.1 0-3.2 2.6-5.8 5.8-5.8 1.2 0 2.3.3 3.2 1z" fill="#00A1E0"/>
+            </svg>
+            <div class="system-name">Salesforce</div>
+            <div class="system-obj">knowledge · contact<br>case · account</div>
+          </div>
+          <div class="system-card">
+            <svg class="system-logo" viewBox="0 0 36 26">
+              <rect width="36" height="26" rx="4" fill="#0070F2"/>
+              <text x="18" y="18" text-anchor="middle" font-size="12" font-weight="800" fill="white" font-family="Arial">SAP</text>
+            </svg>
+            <div class="system-name">SAP</div>
+            <div class="system-obj">customer · order</div>
+          </div>
+          <div class="system-card fallback">
+            <svg class="system-logo" viewBox="0 0 36 26">
+              <rect width="36" height="26" rx="4" fill="#038387"/>
+              <text x="18" y="11" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Share</text>
+              <text x="18" y="20" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Point</text>
+            </svg>
+            <div class="system-name">SharePoint</div>
+            <div class="system-obj">fallback via<br>onesearch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /service agent -->
+
+
+  <!-- ═══════════════════════════════════════════
+       AGENT 2 — ESRI GENERAL AGENT DEMO
+  ═══════════════════════════════════════════ -->
+  <div class="agent-panel">
+
+    <div class="agent-header teal">
+      <div class="agent-header-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="10" cy="10" r="7"/>
+          <path d="M15.5 15.5L21 21"/>
+        </svg>
+      </div>
+      Esri General Agent Demo
+      <span style="font-size:10px;font-weight:400;opacity:0.8;">· GIS Knowledge · Internal Docs · HR Policies</span>
+    </div>
+
+    <div class="cap-row">
+      <span class="cap-pill teal">Search Esri Docs</span>
+      <span class="cap-pill teal">Search ArcGIS Blog</span>
+      <span class="cap-pill teal">Search Community</span>
+      <span class="cap-pill teal">Search Learn.ArcGIS</span>
+      <span class="cap-pill teal">Typeahead</span>
+      <span class="cap-pill teal">Synonyms</span>
+      <span class="cap-pill teal">Faceted Search</span>
+      <span class="cap-pill teal">SharePoint Internal Docs</span>
+      <span class="cap-pill teal">HR &amp; Policies</span>
+    </div>
+
+    <!-- Copilot -->
+    <div class="layer">
+      <div class="layer-label">Esri General Agent<div class="layer-sub">Copilot Studio</div></div>
+      <div class="layer-content">
+        <div class="copilot-row">
+          <div class="copilot-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="11" fill="#0F6CBD"/>
+              <path d="M7 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <circle cx="8.5" cy="14" r="2" fill="white"/>
+              <circle cx="15.5" cy="14" r="2" fill="white"/>
+            </svg>
+            Copilot Studio
+          </div>
+          <div class="meta-tags">
+            <span class="meta-tag">Instructions</span>
+            <span class="meta-tag">Prompts</span>
+            <span class="meta-tag">Topics</span>
+            <span class="meta-tag">Tools</span>
+            <span class="meta-tag">LLM — GPT 4.1 / 5.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flex Gateway Policies -->
+    <div class="layer">
+      <div class="layer-label">Flex Gateway<div class="layer-sub">Policies</div></div>
+      <div class="layer-content">
+        <div class="policy-grid">
+          <span class="policy-tag red">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3a1 1 0 110 2 1 1 0 010-2zm0 3.5c.55 0 1 .45 1 1V11a1 1 0 01-2 0V8.5c0-.55.45-1 1-1z"/></svg>
+            MCP PII Policy
+          </span>
+          <span class="policy-tag orange">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L1 4v4c0 4 3.1 7.7 7 8.9C11.9 15.7 15 12 15 8V4L8 0z"/></svg>
+            MCP Schema Validation
+          </span>
+          <span class="policy-tag blue">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a5 5 0 00-5 5v1H2v7h12V7h-1V6a5 5 0 00-5-5zm0 2a3 3 0 013 3v1H5V6a3 3 0 013-3z"/></svg>
+            Client Validation
+          </span>
+          <span class="policy-tag purple">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L2 3v4c0 3.5 2.5 6.8 6 7.9 3.5-1.1 6-4.4 6-7.9V3L8 0z"/></svg>
+            Token Validation
+          </span>
+          <span class="policy-tag green">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="4" width="14" height="2" rx="1"/><rect x="1" y="7" width="10" height="2" rx="1"/><rect x="1" y="10" width="12" height="2" rx="1"/></svg>
+            Rate Limiting
+          </span>
+          <span class="policy-tag amber">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.5 4h4.5l-3.5 2.5 1.5 4L8 9l-4 2.5 1.5-4L2 5h4.5z"/></svg>
+            Spike Control
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MCP Servers -->
+    <div class="layer">
+      <div class="layer-label">MuleSoft Flex GW<div class="layer-sub">CloudHub 2.0 · MCP</div></div>
+      <div class="layer-content">
+        <div class="mcp-row">
+          <div class="mcp-card">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#E6F4F2" stroke="#b3dbd7" stroke-width="1.5"/>
+                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="13" cy="25" r="3" fill="#007A6E"/>
+                <circle cx="27" cy="25" r="3" fill="#007A6E"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">esri-public<br>-mcp</div>
+            <span class="mcp-badge teal">MCP</span>
+          </div>
+          <div class="mcp-card">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#E6F4F2" stroke="#b3dbd7" stroke-width="1.5"/>
+                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="13" cy="25" r="3" fill="#007A6E"/>
+                <circle cx="27" cy="25" r="3" fill="#007A6E"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">sharepoint<br>-knowledge-mcp</div>
+            <span class="mcp-badge teal">MCP</span>
+          </div>
+          <div class="mcp-card">
+            <div class="mcp-card-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#E6F4F2" stroke="#b3dbd7" stroke-width="1.5"/>
+                <path d="M13 25c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M13 19c0-3.9 3.1-7 7-7" stroke="#007A6E" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+                <circle cx="13" cy="25" r="3" fill="#007A6E"/>
+                <circle cx="27" cy="25" r="3" fill="#007A6E"/>
+              </svg>
+            </div>
+            <div class="mcp-card-name">elasticsearch<br>-search-mcp</div>
+            <span class="mcp-badge teal">MCP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Policy -->
+    <div class="layer">
+      <div class="layer-label">MuleSoft API<div class="layer-sub">Policy</div></div>
+      <div class="layer-content">
+        <div class="policy-bar">⚙&nbsp; client validation policy</div>
+      </div>
+    </div>
+
+    <!-- System APIs -->
+    <div class="layer">
+      <div class="layer-label">Mule Gateway<div class="layer-sub">CloudHub Runtime</div></div>
+      <div class="layer-content">
+        <div class="api-row">
+          <div class="api-card">
+            <div class="api-card-logo">
+              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#007A6E"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+            </div>
+            <div class="api-card-name">esri-search<br>system-api</div>
+          </div>
+          <div class="api-card">
+            <div class="api-card-logo">
+              <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#007A6E"/><text x="14" y="19" text-anchor="middle" font-size="14" font-weight="800" fill="white" font-family="Arial">M</text></svg>
+            </div>
+            <div class="api-card-name">sharepoint<br>sys-api</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Systems -->
+    <div class="layer">
+      <div class="layer-label">Systems<div class="layer-sub">of Record</div></div>
+      <div class="layer-content">
+        <div class="system-row">
+          <div class="system-card">
+            <svg class="system-logo" viewBox="0 0 36 26">
+              <rect width="36" height="26" rx="4" fill="#007AC2"/>
+              <text x="18" y="17" text-anchor="middle" font-size="10" font-weight="800" fill="white" font-family="Arial">Esri</text>
+            </svg>
+            <div class="system-name">Esri Public</div>
+            <div class="system-obj">docs · blog<br>community · learn</div>
+          </div>
+          <div class="system-card">
+            <svg class="system-logo" viewBox="0 0 36 26">
+              <rect width="36" height="26" rx="4" fill="#038387"/>
+              <text x="18" y="11" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Share</text>
+              <text x="18" y="20" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="Arial">Point</text>
+            </svg>
+            <div class="system-name">SharePoint</div>
+            <div class="system-obj">HR · policies<br>internal docs</div>
+          </div>
+          <div class="system-card">
+            <svg class="system-logo" viewBox="0 0 36 26">
+              <rect width="36" height="26" rx="4" fill="#F4BD19"/>
+              <text x="18" y="11" text-anchor="middle" font-size="6.5" font-weight="800" fill="#1a1a1a" font-family="Arial">Elastic</text>
+              <text x="18" y="20" text-anchor="middle" font-size="6.5" font-weight="800" fill="#1a1a1a" font-family="Arial">search</text>
+            </svg>
+            <div class="system-name">Elasticsearch</div>
+            <div class="system-obj">public sites · web</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /esri general agent -->
+
+</div><!-- /agents-stack -->
+
+<div class="page-footer">
+  <div class="footer-pattern">
+    SYSTEM <span class="footer-dot">→</span> API <span class="footer-dot">→</span> MCP <span class="footer-dot">→</span> MS365 COPILOT
+    &nbsp;&nbsp;<span class="footer-dot">·</span>&nbsp;&nbsp;
+    GOVERNED BY MULESOFT AGENT FABRIC
+    &nbsp;&nbsp;<span class="footer-dot">·</span>&nbsp;&nbsp;
+    REPLICABLE ACROSS 300+ APIs
+  </div>
+</div>
+
+</body>
+</html>
