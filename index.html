@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shuvendu Chatterjee - Senior Enterprise Integration Developer | Agentic AI</title>
+    <title>Shuvendu Chatterjee - MuleSoft Mentor | Senior Enterprise Integration Developer</title>
+
+    <!-- SEO & Social Preview -->
+    <meta name="description" content="MuleSoft Mentor and Senior Enterprise Integration Developer with 14+ years architecting production integrations. Building agentic AI systems with MuleSoft Agent Fabric and MCP.">
+
+    <meta property="og:title" content="Shuvendu Chatterjee - MuleSoft Mentor | Senior Enterprise Integration Developer">
+    <meta property="og:description" content="MuleSoft Mentor building production agentic AI with Agent Fabric and MCP. 14+ years, 350+ integrations, 95% SLA.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shuvendu.dev">
+    <meta property="og:image" content="https://shuvendu.dev/images/shuvendu-headshot.jpeg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shuvendu Chatterjee - MuleSoft Mentor">
+    <meta name="twitter:description" content="MuleSoft Mentor building production agentic AI systems.">
+    <meta name="twitter:image" content="https://shuvendu.dev/images/shuvendu-headshot.jpeg">
+
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -145,6 +160,14 @@
             border: 1px solid rgba(14, 165, 233, 0.2);
         }
 
+        /* Mentor tag accent variant */
+        .hero-tag.mentor {
+            background: rgba(124, 58, 237, 0.12);
+            color: var(--accent-alt);
+            border-color: rgba(124, 58, 237, 0.25);
+            margin-right: 0.5rem;
+        }
+
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 800;
@@ -180,7 +203,7 @@
             background: rgba(26, 31, 58, 0.3);
             border-top: 1px solid rgba(14, 165, 233, 0.1);
         }
-        
+
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -189,12 +212,12 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .about-image {
             display: flex;
             justify-content: center;
         }
-        
+
         .headshot {
             width: 350px;
             height: 350px;
@@ -204,24 +227,24 @@
             object-fit: cover;
             transition: all 0.4s ease;
         }
-        
+
         .headshot:hover {
             border-color: var(--accent);
             box-shadow: 0 30px 80px rgba(14, 165, 233, 0.25);
             transform: translateY(-5px);
         }
-        
+
         .about-content {
             padding: 2rem;
         }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .about-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
+
             .headshot {
                 width: 250px;
                 height: 250px;
@@ -248,6 +271,15 @@
             color: var(--accent);
             font-family: 'JetBrains Mono', monospace;
             margin-bottom: 0.5rem;
+        }
+
+        /* Text-style metric (for Mentor tile) */
+        .metric.text .metric-value {
+            font-size: 1.4rem;
+            line-height: 1.3;
+            color: var(--accent-alt);
+            font-family: 'Sora', sans-serif;
+            margin-top: 0.5rem;
         }
 
         .metric-label {
@@ -637,14 +669,18 @@
             </ul>
         </div>
     </nav>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <div class="hero-tag">SENIOR ENTERPRISE INTEGRATION DEVELOPER</div>
+            <div>
+                <span class="hero-tag mentor">MULESOFT MENTOR</span>
+                <span class="hero-tag">SENIOR ENTERPRISE INTEGRATION DEVELOPER</span>
+            </div>
             <h1>Building <span class="highlight">enterprise integration solutions</span></h1>
-            <p class="hero-subtitle">14+ years architecting enterprise integrations at scale. Led 350+ Java 8→17 migration, CloudHub 1.0→2.0 transformation, and Okta→Azure Entra authentication migration. Pioneering Agentic AI with MuleSoft Agent Fabric and Model Context Protocol (MCP).</p>
-            
+            <p class="hero-subtitle"><strong>MuleSoft Mentor</strong> with 14+ years architecting enterprise integrations at scale. Led 350+ Java 8→17 migration, CloudHub 1.0→2.0 transformation, and Okta→Azure Entra authentication migration. Building production <strong>Agentic AI</strong> with MuleSoft Agent Fabric and Model Context Protocol (MCP).</p>
+
             <div class="hero-metrics">
                 <div class="metric">
                     <div class="metric-value">14+</div>
@@ -662,6 +698,10 @@
                     <div class="metric-value">5+</div>
                     <div class="metric-label">Major Migrations</div>
                 </div>
+                <div class="metric text">
+                    <div class="metric-value">MuleSoft<br>Mentor</div>
+                    <div class="metric-label">Invite-Only Recognition</div>
+                </div>
             </div>
 
             <div class="cta-group">
@@ -677,31 +717,31 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image fade-in">
-                    <img src="images/shuvendu-headshot.jpeg" 
+                    <img src="images/shuvendu-headshot.jpeg"
                          alt="Shuvendu Chatterjee"
                          class="headshot">
                 </div>
-               
+
                 <div class="about-content fade-in">
                     <h2 style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--accent);">
                         Hi, I'm Shuvendu
                     </h2>
                     <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        Senior Enterprise Integration Developer with 14+ years managing <strong>350+ production integrations</strong> 
-                        with 95% SLA adherence at Esri and Tata Consultancy Services.
+                        <strong>MuleSoft Mentor</strong> and Senior Enterprise Integration Developer with 14+ years managing <strong>350+ production integrations</strong>
+                        with 95% SLA adherence at Esri and Tata Consultancy Services. Recognized by MuleSoft in 2026 for community contributions and technical depth in agentic AI architectures.
                     </p>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
-                        <strong>Recent Achievements (2024-2025):</strong> Led migration of <strong>350+ MuleSoft applications</strong> from Java 8→17 with zero downtime. 
-                        Architected <strong>CloudHub 1.0→2.0</strong> migration framework for enterprise containerization. 
+                        <strong>Recent Achievements (2024-2026):</strong> Led migration of <strong>350+ MuleSoft applications</strong> from Java 8→17 with zero downtime.
+                        Architected <strong>CloudHub 1.0→2.0</strong> migration framework for enterprise containerization.
                         Executed <strong>Okta→Azure Entra ID</strong> authentication migration across 100+ integrations.
                     </p>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
-                        Currently pioneering <strong>Agentic AI</strong> with MuleSoft Agent Fabric and Model Context Protocol (MCP), 
-                        integrating external LLMs (Claude, Copilot) with enterprise systems. <strong>MIT Professional Education</strong> graduate 
-                        in Applied Agentic AI. <strong>MuleSoft Meetup Leader</strong> at Chino, CA chapter.
+                        Currently building production <strong>Agentic AI</strong> systems with MuleSoft Agent Fabric and Model Context Protocol (MCP),
+                        integrating external LLMs (Claude, Copilot, GitHub Copilot) with enterprise systems. <strong>MIT Professional Education</strong> graduate
+                        in Applied Agentic AI. <strong>MuleSoft Mentor (2026)</strong> and <strong>Meetup Leader</strong> at Chino Chapter serving the Inland Empire &amp; SoCal community.
                     </p>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
-                        Outside of work, I'm a Chino Hills State Park volunteer passionate about environmental stewardship. 
+                        Outside of work, I'm a Chino Hills State Park volunteer passionate about environmental stewardship.
                         I love gaming, analyzing cricket statistics, and planning family road trips with my wife and 4-year-old.
                     </p>
                 </div>
@@ -758,6 +798,12 @@
                 <h3>Latest: Agentic AI</h3>
                 <p>Claude API, OpenAI API, MS365 Copilot Studio, prompt engineering, intelligent agent design, multi-agent orchestration, MCP implementation, autonomous enterprise automation patterns.</p>
             </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🎓</div>
+                <h3>Community Leadership</h3>
+                <p>MuleSoft Mentor (2026) — invite-only recognition for contributors advancing the MuleSoft ecosystem. Meetup Leader at Chino Chapter serving Inland Empire & SoCal. Technical writing and MIT Applied Agentic AI graduate.</p>
+            </div>
         </div>
     </section>
 
@@ -776,8 +822,9 @@
                     <span class="skill">Microsoft Fabric</span>
                     <span class="skill">SSIS (SQL Server Integration Services)</span>
                     <span class="skill">BizTalk Server</span>
-                    <span class="skill">MuleSoft AnyPoint Platform</span>
+                    <span class="skill">MuleSoft Anypoint Platform</span>
                     <span class="skill">CloudHub 1.0 & 2.0</span>
+                    <span class="skill">Flex Gateway</span>
                 </div>
             </div>
 
@@ -799,7 +846,7 @@
                     <span class="skill">AWS</span>
                     <span class="skill">Oracle Database</span>
                     <span class="skill">SQL Server</span>
-                    <span class="skill">MongoDb</span>
+                    <span class="skill">MongoDB</span>
                     <span class="skill">PostgreSQL</span>
                 </div>
             </div>
@@ -822,12 +869,24 @@
                 <div class="skill-list">
                     <span class="skill">Agentic AI Systems</span>
                     <span class="skill">MCP (Model Context Protocol)</span>
-                    <span class="skill">AgentFabric</span>
+                    <span class="skill">Agent Fabric</span>
                     <span class="skill">Claude API</span>
-                    <span class="skill">Github CopilotI</span>
+                    <span class="skill">GitHub Copilot</span>
+                    <span class="skill">Copilot Studio</span>
                     <span class="skill">Multi-Agent Orchestration</span>
                     <span class="skill">Prompt Engineering</span>
                     <span class="skill">Intelligent Automation</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h4 class="skill-category-title">Community & Recognition</h4>
+                <div class="skill-list">
+                    <span class="skill">MuleSoft Mentor</span>
+                    <span class="skill">MuleSoft Meetup Leader</span>
+                    <span class="skill">MIT Applied Agentic AI</span>
+                    <span class="skill">Technical Writing</span>
+                    <span class="skill">Public Speaking</span>
                 </div>
             </div>
 
@@ -856,7 +915,7 @@
                 <h3>Senior Enterprise Integration Developer</h3>
                 <div class="timeline-company">Esri</div>
                 <div class="timeline-date">2023 – Present</div>
-                <p class="timeline-description"><strong>Leading enterprise integration initiatives:</strong> Managing <strong>350+ production integrations</strong> with 95% SLA adherence. <strong>Major Migrations:</strong> Led Java 8→17 migration for 350+ MuleSoft applications with zero downtime including automated upgrade scripts. Architected CloudHub 1.0→2.0 migration framework for 350+ applications. Spearheaded Okta→Azure Entra ID authentication migration across 100+ integrations. <strong>Agentic AI Pioneer:</strong> Designed multi-tenant MCP architecture connecting Copilot, Claude, GitHub Copilot to 50+ enterprise APIs. Mentored 8 engineers on platform modernization and agentic AI patterns.</p>
+                <p class="timeline-description"><strong>Recognized as MuleSoft Mentor (2026).</strong> Leading enterprise integration initiatives: Managing <strong>350+ production integrations</strong> with 95% SLA adherence. <strong>Major Migrations:</strong> Led Java 8→17 migration for 350+ MuleSoft applications with zero downtime including automated upgrade scripts. Architected CloudHub 1.0→2.0 migration framework for 350+ applications. Spearheaded Okta→Azure Entra ID authentication migration across 100+ integrations. <strong>Agentic AI Practitioner:</strong> Designed multi-tenant MCP architecture connecting Copilot, Claude, GitHub Copilot to 50+ enterprise APIs. Mentored 8 engineers on platform modernization and agentic AI patterns.</p>
             </div>
 
             <div class="timeline-item fade-in">
@@ -894,7 +953,7 @@
         <div class="section-header">
             <div class="section-tag">Let's Connect</div>
             <h2 class="section-title">Get <span class="accent">in Touch</span></h2>
-            <p class="section-subtitle">Interested in discussing enterprise integration, platform modernization, or exploring Agentic AI? I'd love to hear from you.</p>
+            <p class="section-subtitle">Interested in discussing enterprise integration, platform modernization, Agent Fabric, MCP, or the MuleSoft Mentor pathway? I'd love to hear from you.</p>
         </div>
 
         <div class="contact-links">
@@ -915,10 +974,11 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Shuvendu Chatterjee. Senior Enterprise Integration Developer | Agentic AI Explorer.</p>
+        <p>&copy; 2026 Shuvendu Chatterjee. MuleSoft Mentor | Senior Enterprise Integration Developer | Agentic AI Practitioner.</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // Smooth navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -946,4 +1006,10 @@
 
         document.querySelectorAll('.fade-in').forEach(el => {
             el.style.opacity = '0';
-            el.style.transf
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
